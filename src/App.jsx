@@ -13,13 +13,13 @@ const PHASES = [
       {
         id: "p1_w1",
         number: 1,
-        dates: "June 30 - July 3",
+        dates: "June 30 - July 5",
         intensity: 5,
-        focus: "Overcoming the Tutorial Trap",
+        focus: "Overcoming the Tutorial Trap & Brand Setup",
         days: [
           {
             id: "p1_w1_d1",
-            date: "June 30, 2026",
+            date: "June 30, 2026 (TODAY)",
             tasks: [
               { id: "p1_w1_d1_t1", text: "💻 LeetCode #1 (Two Sum) typed out manually line-by-line.", type: "dsa" },
               { id: "p1_w1_d1_t2", text: "🛠 Sandbox Method: Open CUJ PYQ Portal codebase, locate the API routing folder, trace how requests pass from frontend to backend.", type: "build" },
@@ -34,7 +34,8 @@ const PHASES = [
               { id: "p1_w1_d2_t1", text: "💻 LeetCode Easy (String problem).", type: "dsa" },
               { id: "p1_w1_d2_t2", text: "🛠 Sandbox Method: Delete the Express route handler for a single endpoint in your local PYQ portal environment, watch it crash, and type it back from memory.", type: "build" },
               { id: "p1_w1_d2_t3", text: "🛠 Git: Practice CLI commands (git init, git add, git commit).", type: "build" },
-              { id: "p1_w1_d2_t4", text: "🏋️ Review Squat stance fundamentals (Calgary Barbell video analysis).", type: "lifting" }
+              { id: "p1_w1_d2_t4", text: "🎤 LinkedIn Update: Change profile headline to exactly 'Full-Stack Developer | MERN Stack | Open to SDE Internships'.", type: "comm" },
+              { id: "p1_w1_d2_t5", text: "🏋️ Review Squat stance fundamentals (Calgary Barbell video analysis).", type: "lifting" }
             ]
           },
           {
@@ -44,19 +45,27 @@ const PHASES = [
               { id: "p1_w1_d3_t1", text: "💻 LeetCode Easy.", type: "dsa" },
               { id: "p1_w1_d3_t2", text: "🛠 Sandbox Method: Trace how MongoDB queries (Mongoose models) pull data inside the catalog.", type: "build" },
               { id: "p1_w1_d3_t3", text: "🛠 Git: Practice branching and merging locally via CLI.", type: "build" },
-              { id: "p1_w1_d3_t4", text: "🎤 Read an English tech article out loud for 5 minutes.", type: "comm" },
+              { id: "p1_w1_d3_t4", text: "🎤 Resume Overhaul: Drop multi-column graphical templates; copy text into a clean, single-column, 1-page ATS-friendly LaTeX standard template.", type: "comm" },
               { id: "p1_w1_d3_t5", text: "🏋️ Check out Nizamabad/Telangana Powerlifting groups on social media.", type: "lifting" }
             ]
           },
           {
             id: "p1_w1_d4",
-            date: "July 3, 2026",
+            date: "July 4, 2026",
             tasks: [
               { id: "p1_w1_d4_t1", text: "💻 LeetCode Easy.", type: "dsa" },
               { id: "p1_w1_d4_t2", text: "🛠 Sandbox Method: Document the complete data flow of the AI-OCR pipeline from Ghostscript upload to Tesseract.js extraction.", type: "build" },
-              { id: "p1_w1_d4_t3", text: "🛠 Git: Simulating and resolving a merge conflict on a test file.", type: "build" },
+              { id: "p1_w1_d4_t3", text: "🎤 Resume Bullet Optimization: Rewrite your CUJ PYQ Portal description using Google’s X-Y-Z formula ('Accomplished [X] as measured by [Y], by doing [Z]').", type: "comm" },
               { id: "p1_w1_d4_t4", text: "🏋️ DM @ts_powerlifting on Instagram to verify 2027 district calendar baselines.", type: "lifting" },
               { id: "p1_w1_d4_t5", text: "🏋️ Buy lifting chalk.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p1_w1_d5",
+            date: "July 5, 2026",
+            tasks: [
+              { id: "p1_w1_d5_t1", text: "💻 Weekly review of code muscle memory.", type: "dsa" },
+              { id: "p1_w1_d5_t2", text: "🛠 Update structural design notes in local project directory.", type: "build" }
             ]
           }
         ]
@@ -64,71 +73,65 @@ const PHASES = [
       {
         id: "p1_w2",
         number: 2,
-        dates: "July 4 - July 10",
+        dates: "July 6 - July 12",
         intensity: 6,
         focus: "Java OOP Muscle Memory & Linux Tools",
         days: [
           {
             id: "p1_w2_d1",
-            date: "July 4, 2026",
+            date: "July 6, 2026",
             tasks: [
               { id: "p1_w2_d1_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
-              { id: "p1_w2_d1_t2", text: "🛠 Hand-write core Java OOP code blocks (Classes, Constructors, Polymorphism, Method Overriding) inside a basic text editor without AI tools or autocomplete.", type: "build" },
-              { id: "p1_w2_d1_t3", text: "🏋️ Track protein targets with MyFitnessPal (Target: 118.8g protein - Weight 66kg x 1.8g).", type: "lifting" }
+              { id: "p1_w2_d1_t2", text: "🛠 Hand-write core Java OOP code blocks inside a basic text editor without AI tools.", type: "build" },
+              { id: "p1_w2_d1_t3", text: "🏋️ MyFitnessPal macro tracking launch (Target: Weight in kg x 1.8g protein).", type: "lifting" }
             ]
           },
           {
             id: "p1_w2_d2",
-            date: "July 5, 2026",
+            date: "July 7, 2026",
             tasks: [
               { id: "p1_w2_d2_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
-              { id: "p1_w2_d2_t2", text: "🛠 Linux: Practice essential server navigation tools (cd, ls, mkdir, grep, basic SSH setup).", type: "build" },
-              { id: "p1_w2_d2_t3", text: "🏋️ Keep macro tracking consistent on MyFitnessPal.", type: "lifting" }
+              { id: "p1_w2_d2_t2", text: "🛠 Linux: Practice essential server navigation tools (cd, ls, mkdir, grep, basic SSH setup).", type: "build" }
             ]
           },
           {
             id: "p1_w2_d3",
-            date: "July 6, 2026",
+            date: "July 8, 2026",
             tasks: [
               { id: "p1_w2_d3_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
-              { id: "p1_w2_d3_t2", text: "🛠 Tools: Set up Postman to manually test the API endpoints of your PYQ portal.", type: "build" },
-              { id: "p1_w2_d3_t3", text: "🏋️ Squat session: Record training metrics and analyze stance depth.", type: "lifting" }
+              { id: "p1_w2_d3_t2", text: "🛠 Tools: Set up Postman to manually test the API endpoints of your PYQ portal.", type: "build" }
             ]
           },
           {
             id: "p1_w2_d4",
-            date: "July 7, 2026",
+            date: "July 9, 2026",
             tasks: [
               { id: "p1_w2_d4_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
-              { id: "p1_w2_d4_t2", text: "🛠 Toggle LinkedIn 'Open to Work' for internships.", type: "build" },
-              { id: "p1_w2_d4_t3", text: "🏋️ Review bench press setup: scapular retraction.", type: "lifting" }
+              { id: "p1_w2_d4_t2", text: "🎤 LinkedIn: Toggle the 'Open to Work' feature visible to recruiters for internships only.", type: "comm" }
             ]
           },
           {
             id: "p1_w2_d5",
-            date: "July 8, 2026",
+            date: "July 10, 2026",
             tasks: [
               { id: "p1_w2_d5_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
-              { id: "p1_w2_d5_t2", text: "🛠 Linux: practice terminal piping and file search commands.", type: "build" },
-              { id: "p1_w2_d5_t3", text: "🏋️ Focus deadlift bracing: engage lats, pull slack out of bar.", type: "lifting" }
+              { id: "p1_w2_d5_t2", text: "🛠 Practice Linux file permissions and search commands (find, chmod).", type: "build" }
             ]
           },
           {
             id: "p1_w2_d6",
-            date: "July 9, 2026",
+            date: "July 11, 2026",
             tasks: [
               { id: "p1_w2_d6_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
-              { id: "p1_w2_d6_t2", text: "🛠 Postman: Save endpoints in collection and test response formats.", type: "build" },
-              { id: "p1_w2_d6_t3", text: "🏋️ Powerlifting: Review district calendar timeline milestones.", type: "lifting" }
+              { id: "p1_w2_d6_t2", text: "🛠 Postman: Save request tests and configure environment variables.", type: "build" }
             ]
           },
           {
             id: "p1_w2_d7",
-            date: "July 10, 2026",
+            date: "July 12, 2026",
             tasks: [
               { id: "p1_w2_d7_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
-              { id: "p1_w2_d7_t2", text: "🛠 Write custom Java OOP sample projects using terminal compilation.", type: "build" },
-              { id: "p1_w2_d7_t3", text: "🎤 Voice record a 2-minute walkthrough of the week's accomplishments.", type: "comm" }
+              { id: "p1_w2_d7_t2", text: "🏋️ Monitor macro metrics and log 1.8g/kg protein intake.", type: "lifting" }
             ]
           }
         ]
@@ -136,64 +139,64 @@ const PHASES = [
       {
         id: "p1_w3",
         number: 3,
-        dates: "July 11 - July 17",
+        dates: "July 13 - July 19",
         intensity: 7,
         focus: "Certification Wrap-up & Core Structures",
         days: [
           {
             id: "p1_w3_d1",
-            date: "July 11, 2026",
+            date: "July 13, 2026",
             tasks: [
-              { id: "p1_w3_d1_t1", text: "🛠 Finish and submit the final modules of the IIT Jammu x Techible Full-Stack Certification.", type: "build" },
-              { id: "p1_w3_d1_t2", text: "💻 Transition to Java Collections syntax: ArrayList manual coding.", type: "dsa" }
+              { id: "p1_w3_d1_t1", text: "🛠 Finish the final modules of the IIT Jammu x Techible Full-Stack Certification.", type: "build" },
+              { id: "p1_w3_d1_t2", text: "💻 Transition to Java Collections syntax (ArrayList manual algorithm).", type: "dsa" }
             ]
           },
           {
             id: "p1_w3_d2",
-            date: "July 12, 2026",
+            date: "July 14, 2026",
             tasks: [
-              { id: "p1_w3_d2_t1", text: "🛠 Pin the certification directly on LinkedIn upon completion.", type: "build" },
-              { id: "p1_w3_d2_t2", text: "💻 Java Collections: Write HashMap string frequency algorithms by hand.", type: "dsa" }
+              { id: "p1_w3_d2_t1", text: "🛠 Submit Techible Certification project and features verification.", type: "build" },
+              { id: "p1_w3_d2_t2", text: "🎤 LinkedIn: Upload and feature your new certification badge prominently on your profile timeline immediately upon completion.", type: "comm" }
             ]
           },
           {
             id: "p1_w3_d3",
-            date: "July 13, 2026",
+            date: "July 15, 2026",
             tasks: [
-              { id: "p1_w3_d3_t1", text: "🎓 Core Data Structures: Master Linked Lists using visualization tools.", type: "academics" },
-              { id: "p1_w3_d3_t2", text: "💻 Solve 1 LeetCode Linked List traversal problem.", type: "dsa" }
+              { id: "p1_w3_d3_t1", text: "💻 Transition to Java Collections syntax (HashMap string frequency algorithms written by hand).", type: "dsa" },
+              { id: "p1_w3_d3_t2", text: "🎓 Core Data Structures: Master Linked Lists using visualization tools.", type: "academics" }
             ]
           },
           {
             id: "p1_w3_d4",
-            date: "July 14, 2026",
+            date: "July 16, 2026",
             tasks: [
-              { id: "p1_w3_d4_t1", text: "🎓 Core Data Structures: Study Stack architecture, properties & overflow/underflow.", type: "academics" },
-              { id: "p1_w3_d4_t2", text: "💻 Implement custom stack in Java.", type: "dsa" }
+              { id: "p1_w3_d4_t1", text: "🎓 Core Data Structures: Master Stack theory using visualization tools.", type: "academics" },
+              { id: "p1_w3_d4_t2", text: "💻 Java collections: Custom stack implementation code in Java.", type: "dsa" }
             ]
           },
           {
             id: "p1_w3_d5",
-            date: "July 15, 2026",
+            date: "July 17, 2026",
             tasks: [
-              { id: "p1_w3_d5_t1", text: "🎓 Core Data Structures: Study Queue architecture and dequeue patterns.", type: "academics" },
-              { id: "p1_w3_d5_t2", text: "💻 Implement custom queue in Java using ArrayDeque.", type: "dsa" }
+              { id: "p1_w3_d5_t1", text: "🎓 Core Data Structures: Master Queue theory using visualization tools.", type: "academics" },
+              { id: "p1_w3_d5_t2", text: "💻 Java collections: Custom queue implementation code in Java.", type: "dsa" }
             ]
           },
           {
             id: "p1_w3_d6",
-            date: "July 16, 2026",
+            date: "July 18, 2026",
             tasks: [
-              { id: "p1_w3_d6_t1", text: "💻 Solve 1 LeetCode Stack-based problem (Valid Parentheses).", type: "dsa" },
-              { id: "p1_w3_d6_t2", text: "🎤 Voice record 2-minute explanation of stack vs queue differences.", type: "comm" }
+              { id: "p1_w3_d6_t1", text: "💻 Implement Linked List reversal without libraries or autocomplete.", type: "dsa" },
+              { id: "p1_w3_d6_t2", text: "🎤 Voice record a 2-minute raw review of Linked List pointers.", type: "comm" }
             ]
           },
           {
             id: "p1_w3_d7",
-            date: "July 17, 2026",
+            date: "July 19, 2026",
             tasks: [
-              { id: "p1_w3_d7_t1", text: "🛠 Double check certification updates on LinkedIn page.", type: "build" },
-              { id: "p1_w3_d7_t2", text: "🏋️ Powerlifting: Review squat form and macro target compliance.", type: "lifting" }
+              { id: "p1_w3_d7_t1", text: "💻 Master HashMap string frequency logic in Java.", type: "dsa" },
+              { id: "p1_w3_d7_t2", text: "🎓 Core Data Structures: Stacks/Queues custom Java implementations for technical interviews.", type: "academics" }
             ]
           }
         ]
@@ -201,80 +204,64 @@ const PHASES = [
       {
         id: "p1_w4",
         number: 4,
-        dates: "July 18 - July 26",
+        dates: "July 20 - July 26",
         intensity: 7,
         focus: "Architectural Deep Dive & MNC Prep",
         days: [
           {
             id: "p1_w4_d1",
-            date: "July 18, 2026",
+            date: "July 20, 2026",
             tasks: [
-              { id: "p1_w4_d1_t1", text: "💻 Dive into structural patterns (Two-Pointer pattern concepts).", type: "dsa" },
-              { id: "p1_w4_d1_t2", text: "🎓 Core CS: Review DBMS normalization forms (1NF).", type: "academics" }
+              { id: "p1_w4_d1_t1", text: "💻 Dive into structural patterns (Two-Pointer, Sliding Window).", type: "dsa" },
+              { id: "p1_w4_d1_t2", text: "🎓 Core CS: Review DBMS normalization forms (1NF, 2NF, 3NF).", type: "academics" }
             ]
           },
           {
             id: "p1_w4_d2",
-            date: "July 19, 2026",
+            date: "July 21, 2026",
             tasks: [
-              { id: "p1_w4_d2_t1", text: "💻 Dive into structural patterns (Sliding Window patterns).", type: "dsa" },
-              { id: "p1_w4_d2_t2", text: "🎓 Core CS: Review DBMS normalization forms (2NF).", type: "academics" }
+              { id: "p1_w4_d2_t1", text: "🛠 Reverse-engineer the JWT HTTP-only cookie authentication mechanism inside the PYQ portal.", type: "build" },
+              { id: "p1_w4_d2_t2", text: "🎓 Core CS: Review SQL join syntax.", type: "academics" }
             ]
           },
           {
             id: "p1_w4_d3",
-            date: "July 20, 2026",
+            date: "July 22, 2026",
             tasks: [
-              { id: "p1_w4_d3_t1", text: "🛠 Reverse-engineer the JWT HTTP-only cookie authentication mechanism inside the PYQ portal.", type: "build" },
-              { id: "p1_w4_d3_t2", text: "🎓 Core CS: Review DBMS normalization forms (3NF).", type: "academics" }
+              { id: "p1_w4_d3_t1", text: "🛠 Type the authentication middleware function out from a blank screen.", type: "build" },
+              { id: "p1_w4_d3_t2", text: "🎓 Core CS: Review the OSI Network Model layers for technical interview screening rounds.", type: "academics" }
             ]
           },
           {
             id: "p1_w4_d4",
-            date: "July 21, 2026",
+            date: "July 23, 2026",
             tasks: [
-              { id: "p1_w4_d4_t1", text: "🛠 Type the authentication middleware function out from a blank screen.", type: "build" },
-              { id: "p1_w4_d4_t2", text: "🎓 Core CS: Review SQL join syntax (INNER, LEFT, RIGHT, FULL).", type: "academics" }
+              { id: "p1_w4_d4_t1", text: "🎤 Weekly Aptitude Practice (Probability & Logical Reasoning screening prep).", type: "comm" },
+              { id: "p1_w4_d4_t2", text: "💻 Solve 2 Two-Pointer LeetCode problems.", type: "dsa" }
             ]
           },
           {
             id: "p1_w4_d5",
-            date: "July 22, 2026",
+            date: "July 24, 2026",
             tasks: [
-              { id: "p1_w4_d5_t1", text: "🎤 Weekly Aptitude Practice (Probability & Logical Reasoning screening prep).", type: "comm" },
-              { id: "p1_w4_d5_t2", text: "💻 Solve 2 LeetCode Sliding Window problems.", type: "dsa" }
+              { id: "p1_w4_d5_t1", text: "💻 Solve 2 Sliding Window LeetCode problems.", type: "dsa" },
+              { id: "p1_w4_d5_t2", text: "🎓 Core CS: Revise Normalization keys and dependencies.", type: "academics" }
             ]
           },
           {
             id: "p1_w4_d6",
-            date: "July 23, 2026",
+            date: "July 25, 2026",
             tasks: [
-              { id: "p1_w4_d6_t1", text: "🎤 Weekly Aptitude Practice: Logical Reasoning patterns.", type: "comm" },
-              { id: "p1_w4_d6_t2", text: "💻 Solve 2 LeetCode Two-Pointer problems.", type: "dsa" }
+              { id: "p1_w4_d6_t1", text: "💻 Review Phase 1 progress: Target 35+ LeetCode problems fully mastered.", type: "dsa" },
+              { id: "p1_w4_d6_t2", text: "🏋️ Equipped powerlifting gear and stance validation.", type: "lifting" }
             ]
           },
           {
             id: "p1_w4_d7",
-            date: "July 24, 2026",
-            tasks: [
-              { id: "p1_w4_d7_t1", text: "💻 Review Phase 1 progress: Target 35+ LeetCode problems fully mastered.", type: "dsa" },
-              { id: "p1_w4_d7_t2", text: "🛠 Authenticate local endpoints using JWT middleware configuration.", type: "build" }
-            ]
-          },
-          {
-            id: "p1_w4_d8",
-            date: "July 25, 2026",
-            tasks: [
-              { id: "p1_w4_d8_t1", text: "🏋️ Equipped powerlifting gear check: wrist wraps and lift chalk.", type: "lifting" },
-              { id: "p1_w4_d8_t2", text: "💻 Solve LeetCode problems to hit targets.", type: "dsa" }
-            ]
-          },
-          {
-            id: "p1_w4_d9",
             date: "July 26, 2026",
             tasks: [
-              { id: "p1_w4_d9_t1", text: "🎓 Verify backlog files and prepare for 7th Sem starting tomorrow.", type: "academics" },
-              { id: "p1_w4_d9_t2", text: "🎤 Voice record Phase 1 summary walk-through.", type: "comm" }
+              { id: "p1_w4_d7_t1", text: "🎓 Complete final preparations for 7th Sem starting tomorrow.", type: "academics" },
+              { id: "p1_w4_d7_t2", text: "🎤 Voice record Phase 1 summary walk-through.", type: "comm" }
             ]
           }
         ]
@@ -300,8 +287,8 @@ const PHASES = [
             id: "p2_w5_d1",
             date: "July 27, 2026",
             tasks: [
-              { id: "p2_w5_d1_t1", text: "🎓 7th Semester officially starts. Locate classroom blocks.", type: "academics" },
-              { id: "p2_w5_d1_t2", text: "🏆 Locate the SIH 2026 SPOC within the CS department.", type: "hackathon" }
+              { id: "p2_w5_d1_t1", text: "🎓 7th Semester officially starts. Locate blocks.", type: "academics" },
+              { id: "p2_w5_d1_t2", text: "🏆 Coordinate with SIH 2026 SPOC within the CS department.", type: "hackathon" }
             ]
           },
           {
@@ -309,22 +296,22 @@ const PHASES = [
             date: "July 28, 2026",
             tasks: [
               { id: "p2_w5_d2_t1", text: "🏆 Assemble a balanced 6-member hackathon team (minimum 1 female member mandatory).", type: "hackathon" },
-              { id: "p2_w5_d2_t2", text: "🎓 Isolate 1.5 hours daily for 3rd and 5th-semester backlog coursework.", type: "academics" }
+              { id: "p2_w5_d2_t2", text: "🎓 Focus heavily on 7th-semester classes while isolating 1.5 hours daily for 3rd and 5th-semester backlog coursework.", type: "academics" }
             ]
           },
           {
             id: "p2_w5_d3",
             date: "July 29, 2026",
             tasks: [
-              { id: "p2_w5_d3_t1", text: "🛠 Sandbox Project: Build a real-time Socket.io Chat App completely from scratch to learn web sockets.", type: "build" },
-              { id: "p2_w5_d3_t2", text: "💻 Grind Trees logic patterns.", type: "dsa" }
+              { id: "p2_w5_d3_t1", text: "🛠 Sandbox Project: Build a real-time Socket.io Chat App completely from scratch to learn web sockets and state sync.", type: "build" },
+              { id: "p2_w5_d3_t2", text: "💻 Grind Trees and Graphs logic patterns.", type: "dsa" }
             ]
           },
           {
             id: "p2_w5_d4",
             date: "July 30, 2026",
             tasks: [
-              { id: "p2_w5_d4_t1", text: "🛠 Socket.io Chat App: Set up server rooms and connection events.", type: "build" },
+              { id: "p2_w5_d4_t1", text: "🛠 Socket.io Chat App: Set up client state sync.", type: "build" },
               { id: "p2_w5_d4_t2", text: "💻 Grind Graphs logic patterns.", type: "dsa" }
             ]
           },
@@ -332,16 +319,16 @@ const PHASES = [
             id: "p2_w5_d5",
             date: "July 31, 2026",
             tasks: [
-              { id: "p2_w5_d5_t1", text: "🛠 Socket.io Chat App: Establish state sync mechanism.", type: "build" },
-              { id: "p2_w5_d5_t2", text: "🎓 Backlog: Study 3rd sem Object-Oriented Analysis & Design concepts.", type: "academics" }
+              { id: "p2_w5_d5_t1", text: "🛠 Socket.io Chat App: Implement room joining.", type: "build" },
+              { id: "p2_w5_d5_t2", text: "🎓 Backlog study: 3rd sem Object Oriented Programming.", type: "academics" }
             ]
           },
           {
             id: "p2_w5_d6",
             date: "August 1, 2026",
             tasks: [
-              { id: "p2_w5_d6_t1", text: "🛠 Socket.io Chat App: Code room joining frontend interface.", type: "build" },
-              { id: "p2_w5_d6_t2", text: "🎓 Backlog: Study 5th sem databases queries.", type: "academics" }
+              { id: "p2_w5_d6_t1", text: "🛠 Socket.io Chat App: Deploy node sockets backend.", type: "build" },
+              { id: "p2_w5_d6_t2", text: "🎓 Backlog study: 5th sem databases.", type: "academics" }
             ]
           },
           {
@@ -349,14 +336,14 @@ const PHASES = [
             date: "August 2, 2026",
             tasks: [
               { id: "p2_w5_d7_t1", text: "💻 Solve 2 LeetCode Tree problems.", type: "dsa" },
-              { id: "p2_w5_d7_t2", text: "🏋️ Heavy squat day: Record bracing metrics.", type: "lifting" }
+              { id: "p2_w5_d7_t2", text: "🏋️ Heavy squat day: focus on breathing bracing.", type: "lifting" }
             ]
           },
           {
             id: "p2_w5_d8",
             date: "August 3, 2026",
             tasks: [
-              { id: "p2_w5_d8_t1", text: "🎓 Attend core 7th-sem lectures: Compiler Design & OS.", type: "academics" },
+              { id: "p2_w5_d8_t1", text: "🎓 Attend core 7th-sem lectures.", type: "academics" },
               { id: "p2_w5_d8_t2", text: "💻 Solve 2 LeetCode Graph traversal problems.", type: "dsa" }
             ]
           },
@@ -364,8 +351,8 @@ const PHASES = [
             id: "p2_w5_d9",
             date: "August 4, 2026",
             tasks: [
-              { id: "p2_w5_d9_t1", text: "🏆 SIH: Brainstorm problem statement ideas with team.", type: "hackathon" },
-              { id: "p2_w5_d9_t2", text: "🛠 Socket.io Chat App: Build typing indicator states.", type: "build" }
+              { id: "p2_w5_d9_t1", text: "🏆 SIH: Pitch design reviews with team.", type: "hackathon" },
+              { id: "p2_w5_d9_t2", text: "🛠 Socket.io Chat App: Add user typing indicators.", type: "build" }
             ]
           },
           {
@@ -373,39 +360,39 @@ const PHASES = [
             date: "August 5, 2026",
             tasks: [
               { id: "p2_w5_d10_t1", text: "💻 Grind Trees traversals algorithms.", type: "dsa" },
-              { id: "p2_w5_d10_t2", text: "🎓 Backlog: Study 3rd sem OS structures.", type: "academics" }
+              { id: "p2_w5_d10_t2", text: "🎓 Backlog: Revise database structures.", type: "academics" }
             ]
           },
           {
             id: "p2_w5_d11",
             date: "August 6, 2026",
             tasks: [
-              { id: "p2_w5_d11_t1", text: "🛠 Socket.io Chat App: Integrate database logs storage.", type: "build" },
-              { id: "p2_w5_d11_t2", text: "🏋️ Powerlifting: Focus on equipped bench setup.", type: "lifting" }
+              { id: "p2_w5_d11_t1", text: "🛠 Socket.io Chat App: Integrate database history storage.", type: "build" },
+              { id: "p2_w5_d11_t2", text: "🏋️ Powerlifting equipped bench setup.", type: "lifting" }
             ]
           },
           {
             id: "p2_w5_d12",
             date: "August 7, 2026",
             tasks: [
-              { id: "p2_w5_d12_t1", text: "🎓 Backlog: Study 3rd sem Data Structures theory.", type: "academics" },
-              { id: "p2_w5_d12_t2", text: "🎤 Voice record a 2-minute project architecture overview.", type: "comm" }
+              { id: "p2_w5_d12_t1", text: "🎓 Backlog study: 3rd sem Data Structures.", type: "academics" },
+              { id: "p2_w5_d12_t2", text: "🎤 Voice record a 2-minute project summary walkthrough.", type: "comm" }
             ]
           },
           {
             id: "p2_w5_d13",
             date: "August 8, 2026",
             tasks: [
-              { id: "p2_w5_d13_t1", text: "🛠 Socket.io Chat App: Push code to Github, write README.md.", type: "build" },
-              { id: "p2_w5_d13_t2", text: "💻 Solve 1 Graph Dijkstra's algorithm problem.", type: "dsa" }
+              { id: "p2_w5_d13_t1", text: "🛠 Socket.io Chat App: Complete clean build and push code to Github.", type: "build" },
+              { id: "p2_w5_d13_t2", text: "💻 Solve 1 Graph shortest path problem.", type: "dsa" }
             ]
           },
           {
             id: "p2_w5_d14",
             date: "August 9, 2026",
             tasks: [
-              { id: "p2_w5_d14_t1", text: "🏆 SIH: Run prototype database design checks.", type: "hackathon" },
-              { id: "p2_w5_d14_t2", text: "🏋️ Rest and recovery validation.", type: "lifting" }
+              { id: "p2_w5_d14_t1", text: "🏆 SIH: Prototype schema validation reviews.", type: "hackathon" },
+              { id: "p2_w5_d14_t2", text: "🏋️ Rest and recovery meal targets verification.", type: "lifting" }
             ]
           }
         ]
@@ -421,7 +408,7 @@ const PHASES = [
             id: "p2_w6_d1",
             date: "August 10, 2026",
             tasks: [
-              { id: "p2_w6_d1_t1", text: "🏆 SIH: Run rapid team sprint to wireframe the core product.", type: "hackathon" },
+              { id: "p2_w6_d1_t1", text: "🏆 STRICT TARGET: Smart India Hackathon (SIH 2026) registration closes strictly on September 6. Run rapid team sprints to wireframe prototype.", type: "hackathon" },
               { id: "p2_w6_d1_t2", text: "💻 DSA: Kadane’s Algorithm (LeetCode Medium).", type: "dsa" }
             ]
           },
@@ -445,7 +432,7 @@ const PHASES = [
             id: "p2_w6_d4",
             date: "August 25, 2026",
             tasks: [
-              { id: "p2_w6_d4_t1", text: "🛠 Build: Launch React Minimalist Portfolio Site highlighting live links.", type: "build" },
+              { id: "p2_w6_d4_t1", text: "🛠 Build and launch your React Minimalist Portfolio Site highlighting the live links of your projects.", type: "build" },
               { id: "p2_w6_d4_t2", text: "💻 DSA: Grind 2 LeetCode Mediums daily.", type: "dsa" }
             ]
           },
@@ -462,7 +449,7 @@ const PHASES = [
             date: "September 5, 2026",
             tasks: [
               { id: "p2_w6_d6_t1", text: "🏆 SIH: Run final product walk-through and compile PDF presentation.", type: "hackathon" },
-              { id: "p2_w6_d6_t2", text: "🎤 Perform mock presentation pitching and review gaps.", type: "comm" }
+              { id: "p2_w6_d6_t2", text: "🎤 LinkedIn: Add your portfolio site link to your LinkedIn profile and GitHub bio.", type: "comm" }
             ]
           },
           {
@@ -480,13 +467,13 @@ const PHASES = [
         number: 7,
         dates: "September 7 - October 2026",
         intensity: 9,
-        focus: "LeetCode 100+ & Pramp Interviews",
+        focus: "LeetCode 100+ & Mock OS Concepts",
         days: [
           {
             id: "p2_w7_d1",
             date: "September 7, 2026",
             tasks: [
-              { id: "p2_w7_d1_t1", text: "💻 DSA: Cross the milestone of 100+ LeetCode problems.", type: "dsa" },
+              { id: "p2_w7_d1_t1", text: "💻 Cross the milestone of 100+ LeetCode problems.", type: "dsa" },
               { id: "p2_w7_d1_t2", text: "🏋️ 2027 District Prep: Commit to a dedicated strength block. Record squat logs.", type: "lifting" }
             ]
           },
@@ -494,7 +481,7 @@ const PHASES = [
             id: "p2_w7_d2",
             date: "September 14, 2026",
             tasks: [
-              { id: "p2_w7_d2_t1", text: "💻 Formulate technical fluency: Pramp.com mock interview. Practice 'Think Aloud'.", type: "dsa" },
+              { id: "p2_w7_d2_t1", text: "💻 Formulate technical fluency via Pramp.com mock interviews (Practice the 'Think Aloud' technique while coding).", type: "dsa" },
               { id: "p2_w7_d2_t2", text: "🏋️ Record squat logs and monitor stance changes.", type: "lifting" }
             ]
           },
@@ -526,7 +513,7 @@ const PHASES = [
             id: "p2_w7_d6",
             date: "October 15, 2026",
             tasks: [
-              { id: "p2_w7_d6_t1", text: "💻 Pramp.com mock coding interview: Solve graph algorithms.", type: "dsa" },
+              { id: "p2_w7_d6_t1", text: "🎓 Core CS: Deepen Core Operating System concepts (Process vs Threads, Deadlocks, Virtual Memory) using standard interview revision platforms.", type: "academics" },
               { id: "p2_w7_d6_t2", text: "🏋️ Powerlifting strength block evaluation.", type: "lifting" }
             ]
           },
@@ -551,7 +538,7 @@ const PHASES = [
             id: "p2_w8_d1",
             date: "November 1, 2026",
             tasks: [
-              { id: "p2_w8_d1_t1", text: "🎓 Academics: Dedicate 4 hours daily to erasing all 5 pending backlogs.", type: "academics" },
+              { id: "p2_w8_d1_t1", text: "🎓 High-Stakes End-Semester Exam Crunch Phase. Dedicate 4 hours daily to erasing all 5 pending backlogs.", type: "academics" },
               { id: "p2_w8_d1_t2", text: "💻 DSA: Maintain LeetCode streak (1 targeted problem daily).", type: "dsa" }
             ]
           },
@@ -559,7 +546,7 @@ const PHASES = [
             id: "p2_w8_d2",
             date: "November 10, 2026",
             tasks: [
-              { id: "p2_w8_d2_t1", text: "🎓 Academics: Deep-dive into 3rd-semester backlog syllabus revision.", type: "academics" },
+              { id: "p2_w8_d2_t1", text: "🎓 Academics: Deep-dive into 3rd-semester backlog syllabus revision (4 active papers).", type: "academics" },
               { id: "p2_w8_d2_t2", text: "💻 DSA: 1 targeted problem to keep streak.", type: "dsa" }
             ]
           },
@@ -567,7 +554,7 @@ const PHASES = [
             id: "p2_w8_d3",
             date: "November 20, 2026",
             tasks: [
-              { id: "p2_w8_d3_t1", text: "🎓 Academics: Deep-dive into 5th-semester backlog syllabus revision.", type: "academics" },
+              { id: "p2_w8_d3_t1", text: "🎓 Academics: Deep-dive into 5th-semester backlog syllabus revision (1 active paper).", type: "academics" },
               { id: "p2_w8_d3_t2", text: "💻 DSA: LeetCode Easy/Medium daily.", type: "dsa" }
             ]
           },
@@ -643,7 +630,7 @@ const PHASES = [
             date: "January 10, 2027",
             tasks: [
               { id: "p3_w9_d3_t1", text: "💻 DSA: Break the 150+ problem milestone.", type: "dsa" },
-              { id: "p3_w9_d3_t2", text: "🛠 Career: Format behavioral answers utilizing the STAR framework mapped to actual PYQ portal deployment hurdles.", type: "build" }
+              { id: "p3_w9_d3_t2", text: "🛠 Career: Format behavior answers utilizing the STAR framework (Situation, Task, Action, Result) mapped to your actual PYQ portal deployment hurdles.", type: "build" }
             ]
           },
           {
@@ -674,7 +661,7 @@ const PHASES = [
             id: "p3_w9_d7",
             date: "January 31, 2027",
             tasks: [
-              { id: "p3_w9_d7_t1", text: "💻 DSA: 150+ milestone completed and documented.", type: "dsa" },
+              { id: "p3_w9_d7_t1", text: "🎓 Interview Prep: Complete thorough mock assessments and core platform debugging routines.", type: "academics" },
               { id: "p3_w9_d7_t2", text: "🛠 Career: Follow up on screening test evaluations.", type: "build" }
             ]
           }
@@ -692,7 +679,7 @@ const PHASES = [
             date: "February 1, 2027",
             tasks: [
               { id: "p3_w10_d1_t1", text: "🛠 Career: High-volume SDE internship application follow-ups.", type: "build" },
-              { id: "p3_w10_d1_t2", text: "🏋️ Powerlifting Meet Action: Submit your official Telangana Powerlifting Association (TPA) annual athlete card registration (Aadhaar, photo, fee processing).", type: "lifting" }
+              { id: "p3_w10_d1_t2", text: "🏋️ Powerlifting Meet Action: Submit your official TPA annual athlete card registration (Aadhaar, photo, fee processing).", type: "lifting" }
             ]
           },
           {
@@ -707,7 +694,7 @@ const PHASES = [
             id: "p3_w10_d3",
             date: "February 10, 2027",
             tasks: [
-              { id: "p3_w10_d3_t1", text: "🛠 Career: Mock technical interviews (System Design & DS).", type: "build" },
+              { id: "p3_w10_d3_t1", text: "🛠 Career: Technical interview preparation and behavioral mock assessments.", type: "build" },
               { id: "p3_w10_d3_t2", text: "🏋️ Powerlifting: Attempt selections based on heavy lift singles.", type: "lifting" }
             ]
           },
@@ -715,7 +702,7 @@ const PHASES = [
             id: "p3_w10_d4",
             date: "February 15, 2027",
             tasks: [
-              { id: "p3_w10_d4_t1", text: "💻 DSA: Solve 1 LeetCode Medium problem.", type: "dsa" },
+              { id: "p3_w10_d4_t1", text: "💻 DSA: Coding sprints to land the SDE internship.", type: "dsa" },
               { id: "p3_w10_d4_t2", text: "🏋️ Powerlifting: Equipped gear checks and platform command runs.", type: "lifting" }
             ]
           },
@@ -731,7 +718,7 @@ const PHASES = [
             id: "p3_w10_d6",
             date: "February 25, 2027",
             tasks: [
-              { id: "p3_w10_d6_t1", text: "🛠 Career: Target internship contract signing.", type: "build" },
+              { id: "p3_w10_d6_t1", text: "🛠 Career: Focus entirely on technical interview preparation, behavioral mocks, and coding sprints to land the internship.", type: "build" },
               { id: "p3_w10_d6_t2", text: "🏋️ Powerlifting: Manage nutritional water/food intake to nail the official 2-hour pre-meet weigh-in scale.", type: "lifting" }
             ]
           },
@@ -782,7 +769,7 @@ const PHASES = [
             id: "p4_w11_d3",
             date: "April 1, 2027",
             tasks: [
-              { id: "p4_w11_d3_t1", text: "🛠 Career: Study production deployment infrastructure (Docker files & parameters).", type: "build" },
+              { id: "p4_w11_d3_t1", text: "🛠 Career: Study production deployment infrastructure (Docker, AWS fundamentals).", type: "build" },
               { id: "p4_w11_d3_t2", text: "💻 DSA: Grind 1 LeetCode daily.", type: "dsa" }
             ]
           },
@@ -790,7 +777,7 @@ const PHASES = [
             id: "p4_w11_d4",
             date: "April 15, 2027",
             tasks: [
-              { id: "p4_w11_d4_t1", text: "🛠 Career: Study production deployment infrastructure (AWS fundamentals).", type: "build" },
+              { id: "p4_w11_d4_t1", text: "🛠 Career: Study AWS deployment fundamentals.", type: "build" },
               { id: "p4_w11_d4_t2", text: "💻 DSA: Keep count up to 180+ problems.", type: "dsa" }
             ]
           },
@@ -814,7 +801,7 @@ const PHASES = [
             id: "p4_w11_d7",
             date: "May 31, 2027",
             tasks: [
-              { id: "p4_w11_d7_t1", text: "🛠 Career: Document internship achievements for resume optimization.", type: "build" },
+              { id: "p4_w11_d7_t1", text: "🎤 Resume Update: Add your active startup role to your resume, including real corporate engineering metrics (e.g., API optimizations or cloud load metrics).", type: "comm" },
               { id: "p4_w11_d7_t2", text: "💻 DSA: Maintain problem count to clear 180+ threshold.", type: "dsa" }
             ]
           }
@@ -831,7 +818,7 @@ const PHASES = [
             id: "p4_w12_d1",
             date: "June 1, 2027",
             tasks: [
-              { id: "p4_w12_d1_t1", text: "🛠 Career: Leverage 6 months of corporate SDE experience to bypass automated resume filters.", type: "build" },
+              { id: "p4_w12_d1_t1", text: "🛠 Career: Capitalize on 6 months of corporate SDE experience to bypass automated resume filters.", type: "build" },
               { id: "p4_w12_d1_t2", text: "🛠 Career: Initiate targeted LinkedIn Referral Strategy with SDE leads.", type: "build" }
             ]
           },
@@ -839,7 +826,7 @@ const PHASES = [
             id: "p4_w12_d2",
             date: "June 5, 2027",
             tasks: [
-              { id: "p4_w12_d2_t1", text: "🛠 Career: Target SDE-1 roles at Amazon, Adobe, Microsoft.", type: "build" },
+              { id: "p4_w12_d2_t1", text: "🛠 Career: Engage with SDE leads at major MNCs (Amazon, Adobe, Microsoft) via customized cold messaging.", type: "build" },
               { id: "p4_w12_d2_t2", text: "🎤 Practice cold outreach templates and pitches.", type: "comm" }
             ]
           },
@@ -984,7 +971,7 @@ export default function App() {
     localStorage.setItem("prince_tracker_completed_gaps", JSON.stringify(completedGaps));
   }, [completedGaps]);
 
-  // Date Logic
+  // Date Logic - starts exactly TODAY, June 30, 2026.
   const baselineDate = new Date("2026-06-30");
   const [currentDate, setCurrentDate] = useState(() => new Date("2026-06-30"));
   
@@ -1166,19 +1153,39 @@ export default function App() {
               <p style={{ color: "var(--text-secondary)", lineHeight: "1.5" }}>
                 Clear all 5 active backlogs (4 from 3rd sem, 1 from 5th sem) to secure a definitive <strong style={{ color: "var(--text-primary)" }}>6.97+ final graduation CGPA</strong>.
               </p>
-              <div style={{ marginTop: "4px" }}>
-                <span style={{ color: "var(--text-muted)", fontSize: "0.8rem", display: "block" }}>Tracker Deployment:</span>
-                <a href="https://prince-tracker.vercel.app/" target="_blank" rel="noopener noreferrer" style={{
-                  color: "var(--color-blue)",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "4px"
-                }}>
-                  🌐 prince-tracker.vercel.app (Live Dashboard)
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                </a>
+              
+              {/* Profile Links */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginTop: "4px" }}>
+                <div>
+                  <span style={{ color: "var(--text-muted)", fontSize: "0.75rem", display: "block" }}>Flagship Project:</span>
+                  <a href="https://project-wx9j1.vercel.app" target="_blank" rel="noopener noreferrer" style={{
+                    color: "var(--color-blue)",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    fontSize: "0.85rem",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "4px"
+                  }}>
+                    🌐 CUJ PYQ Portal (project-wx9j1.vercel.app)
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                  </a>
+                </div>
+                <div>
+                  <span style={{ color: "var(--text-muted)", fontSize: "0.75rem", display: "block" }}>Tracker Deployment:</span>
+                  <a href="https://prince-tracker.vercel.app/" target="_blank" rel="noopener noreferrer" style={{
+                    color: "var(--color-blue)",
+                    textDecoration: "none",
+                    fontWeight: 600,
+                    fontSize: "0.85rem",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "4px"
+                  }}>
+                    🌐 prince-tracker.vercel.app (Live Dashboard)
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                  </a>
+                </div>
               </div>
             </div>
 
@@ -1189,7 +1196,7 @@ export default function App() {
                 Career Vision & Strategy
               </div>
               <p style={{ color: "var(--text-secondary)", lineHeight: "1.5" }}>
-                8th Sem Startup SDE Intern ➔ Fast-Growing Startup Corporate Shipping ➔ Off-Campus Tech MNC SDE-1 Referral Blitz (Amazon, Adobe, Microsoft).
+                8th Sem SDE Intern ➔ Fast-Growing Startup Corporate Shipping ➔ Off-Campus Tech MNC SDE-1 Referral Blitz (Amazon, Adobe, Microsoft).
               </p>
               <span style={{
                 fontSize: "0.75rem",
@@ -1201,7 +1208,7 @@ export default function App() {
                 alignItems: "center",
                 gap: "4px"
               }}>
-                🛑 GATE is officially decommissioned.
+                🛑 GATE track is officially decommissioned.
               </span>
             </div>
 
@@ -1233,7 +1240,7 @@ export default function App() {
               📊 Unified Roadmap Tracker
             </h2>
             <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", marginTop: "2px" }}>
-              Timeline baseline starts exactly on June 30, 2026.
+              Timeline baseline starts exactly TODAY, June 30, 2026.
             </p>
           </div>
 
