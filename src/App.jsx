@@ -1,774 +1,1997 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+// Full Day-by-Day Roadmap Data Structure
 const PHASES = [
   {
-    id: "p1", label: "Phase 1", sublabel: "Summer Grind",
-    dates: "Jun 27 – Jul 26", color: "#F59E0B", dim: "#78350F",
+    id: "phase1",
+    title: "PHASE 1: THE SANDBOX REVERSE-ENGINEERING & HABIT RESET",
+    dates: "June 30 – July 26, 2026",
+    color: "#F59E0B",
+    dimColor: "rgba(245, 158, 11, 0.15)",
+    glowColor: "rgba(245, 158, 11, 0.4)",
     weeks: [
       {
-        wn: 1, label: "Setup Everything", dates: "Jun 27 – Jul 3", intensity: 5,
-        goal: "Install habits. No zero days. Foundation only.",
+        id: "p1_w1",
+        number: 1,
+        dates: "June 30 - July 3",
+        intensity: 5,
+        focus: "Overcoming the Tutorial Trap",
         days: [
-          { date: "Sat Jun 27", tasks: [
-            "💻 LeetCode Easy #1: Two Sum — create account, just do it",
-            "🛠 Watch freeCodeCamp Git tutorial on YouTube — 1 hour",
-            "📜 Techible cert — 1.5 hrs",
-            "📱 DM @ts_powerlifting: 'Beginner 66kg equipped from Kamareddy, when is next competition?'",
-            "🏋️ POWERLIFTING STUDY: Read 'Bracing & Valsalva Maneuver' — search Alan Thrall YouTube 'How to Brace'",
-          ]},
-          { date: "Sun Jun 28", tasks: [
-            "💻 LeetCode Easy #2: Valid Palindrome",
-            "🛠 Git: git init → git add → git commit → git push on test folder",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'Squat stance and toe angle' — Calgary Barbell YouTube",
-            "🎤 Voice record: 'Tell me about PYQ Portal' — 2 mins, listen back",
-          ]},
-          { date: "Mon Jun 29", tasks: [
-            "💻 LeetCode Easy #3: Best Time to Buy Stock",
-            "🛠 Git: branch → checkout → merge practice",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'Hip hinge and deadlift setup' — Alan Thrall YouTube",
-            "📱 Join Facebook: 'Nizamabad Powerlifting' + 'Telangana Powerlifting'",
-          ]},
-          { date: "Tue Jun 30", tasks: [
-            "💻 LeetCode Easy #4: Contains Duplicate",
-            "🛠 Git: pull → clone → fork a repo",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'Bench Press setup — scapular retraction and arch' — Calgary Barbell",
-            "🔗 LinkedIn: update headline to 'Full-Stack Developer | MERN | Open to Internships'",
-          ]},
-          { date: "Wed Jul 1", tasks: [
-            "💻 LeetCode Easy #5: Valid Anagram",
-            "🛠 Git: raise a Pull Request on your own repo",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Read about Linear Progression — Starting Strength model (search 'linear progression powerlifting beginner')",
-            "🌐 Register on devfolio.co — create account",
-          ]},
-          { date: "Thu Jul 2", tasks: [
-            "💻 LeetCode Easy #6: Longest Common Prefix",
-            "🛠 Git: stash → log → merge conflict resolution",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'How to use RPE' — Calgary Barbell YouTube",
-            "🌐 Register on unstop.com — post in team-finder",
-          ]},
-          { date: "Fri Jul 3", tasks: [
-            "💻 LeetCode Easy #7: Reverse String",
-            "📜 Techible cert — 2 hrs push",
-            "🛠 Push PYQ Portal to GitHub with README + screenshots",
-            "🏋️ POWERLIFTING STUDY: Watch 'What is MEV MAV MRV' — understand volume landmarks",
-            "🎤 Voice record: 'What was the hardest part of PYQ Portal?' — 2 mins",
-          ]},
+          {
+            id: "p1_w1_d1",
+            date: "June 30, 2026",
+            tasks: [
+              { id: "p1_w1_d1_t1", text: "💻 LeetCode #1 (Two Sum) typed out manually line-by-line.", type: "dsa" },
+              { id: "p1_w1_d1_t2", text: "🛠 Sandbox Method: Open CUJ PYQ Portal codebase, locate the API routing folder, trace how requests pass from frontend to backend.", type: "build" },
+              { id: "p1_w1_d1_t3", text: "🎤 Voice record a 2-minute raw walkthrough of the PYQ portal, list all filler words used.", type: "comm" },
+              { id: "p1_w1_d1_t4", text: "🏋️ Study Bracing & Valsalva mechanics (Alan Thrall video analysis).", type: "lifting" }
+            ]
+          },
+          {
+            id: "p1_w1_d2",
+            date: "July 1, 2026",
+            tasks: [
+              { id: "p1_w1_d2_t1", text: "💻 LeetCode Easy (String problem).", type: "dsa" },
+              { id: "p1_w1_d2_t2", text: "🛠 Sandbox Method: Delete the Express route handler for a single endpoint in your local PYQ portal environment, watch it crash, and type it back from memory.", type: "build" },
+              { id: "p1_w1_d2_t3", text: "🛠 Git: Practice CLI commands (git init, git add, git commit).", type: "build" },
+              { id: "p1_w1_d2_t4", text: "🏋️ Review Squat stance fundamentals (Calgary Barbell video analysis).", type: "lifting" }
+            ]
+          },
+          {
+            id: "p1_w1_d3",
+            date: "July 2, 2026",
+            tasks: [
+              { id: "p1_w1_d3_t1", text: "💻 LeetCode Easy.", type: "dsa" },
+              { id: "p1_w1_d3_t2", text: "🛠 Sandbox Method: Trace how MongoDB queries (Mongoose models) pull data inside the catalog.", type: "build" },
+              { id: "p1_w1_d3_t3", text: "🛠 Git: Practice branching and merging locally via CLI.", type: "build" },
+              { id: "p1_w1_d3_t4", text: "🎤 Read an English tech article out loud for 5 minutes.", type: "comm" },
+              { id: "p1_w1_d3_t5", text: "🏋️ Check out Nizamabad/Telangana Powerlifting groups on social media.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p1_w1_d4",
+            date: "July 3, 2026",
+            tasks: [
+              { id: "p1_w1_d4_t1", text: "💻 LeetCode Easy.", type: "dsa" },
+              { id: "p1_w1_d4_t2", text: "🛠 Sandbox Method: Document the complete data flow of the AI-OCR pipeline from Ghostscript upload to Tesseract.js extraction.", type: "build" },
+              { id: "p1_w1_d4_t3", text: "🛠 Git: Simulating and resolving a merge conflict on a test file.", type: "build" },
+              { id: "p1_w1_d4_t4", text: "🏋️ DM @ts_powerlifting on Instagram to verify 2027 district calendar baselines.", type: "lifting" },
+              { id: "p1_w1_d4_t5", text: "🏋️ Buy lifting chalk.", type: "lifting" }
+            ]
+          }
         ]
       },
       {
-        wn: 2, label: "Java + DSA Habit + PL Technique", dates: "Jul 4 – Jul 10", intensity: 6,
-        goal: "Java daily. 14 LeetCode done. Squat and deadlift technique understood.",
+        id: "p1_w2",
+        number: 2,
+        dates: "July 4 - July 10",
+        intensity: 6,
+        focus: "Java OOP Muscle Memory & Linux Tools",
         days: [
-          { date: "Sat Jul 4", tasks: [
-            "💻 LeetCode Easy #8: Single Number",
-            "☕ Java: Kunal Kushwaha Episode 1 — 1.5 hrs",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'How to Squat — full tutorial' Alan Thrall (45 mins). Take notes.",
-            "🏋️ AT GYM: Film your squat from side angle. Watch it back.",
-          ]},
-          { date: "Sun Jul 5", tasks: [
-            "💻 LeetCode Easy #9: Missing Number",
-            "☕ Java: Student class — constructor, getters, setters",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'How to Deadlift — full tutorial' Alan Thrall. Take notes.",
-            "🏋️ AT GYM: Film your deadlift from side angle. Watch it back.",
-          ]},
-          { date: "Mon Jul 6", tasks: [
-            "💻 LeetCode Easy #10: Climbing Stairs",
-            "☕ Java: this keyword, method overloading",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'How to Bench Press' Calgary Barbell. Take notes.",
-            "🏋️ AT GYM: Film your bench from side angle. Watch it back.",
-          ]},
-          { date: "Tue Jul 7", tasks: [
-            "💻 LeetCode Easy #11: Majority Element",
-            "☕ Java: Inheritance — Animal → Dog + Cat",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Read about 'Sets and Reps for beginners — 3x5 vs 5x5 vs 3x8'",
-            "🔗 LinkedIn: turn on Open to Work — internships only",
-          ]},
-          { date: "Wed Jul 8", tasks: [
-            "💻 LeetCode Easy #12: Move Zeroes",
-            "☕ Java: Polymorphism + method overriding",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'How to write your first beginner program' — Barbell Medicine YouTube",
-            "🏋️ ACTION: Write your own weekly training plan — Squat/Bench/Deadlift with sets + reps",
-          ]},
-          { date: "Thu Jul 9", tasks: [
-            "💻 LeetCode Easy #13: Happy Number",
-            "☕ Java: Abstract classes + Interfaces",
-            "📜 Techible cert — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Read 'Protein for strength athletes — how much do I need?'",
-            "🏋️ ACTION: Calculate your daily protein target (bodyweight in kg × 1.8g = daily grams)",
-          ]},
-          { date: "Fri Jul 10", tasks: [
-            "💻 LeetCode Easy #14 + #15 — double day",
-            "☕ Java: Library Book OOP mini project",
-            "📜 Techible cert — 2 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'Creatine — everything you need to know' — Jeff Nippard (20 mins)",
-            "🏋️ ACTION: Start taking 5g creatine daily if not already",
-          ]},
+          {
+            id: "p1_w2_d1",
+            date: "July 4, 2026",
+            tasks: [
+              { id: "p1_w2_d1_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
+              { id: "p1_w2_d1_t2", text: "🛠 Hand-write core Java OOP code blocks (Classes, Constructors, Polymorphism, Method Overriding) inside a basic text editor without AI tools or autocomplete.", type: "build" },
+              { id: "p1_w2_d1_t3", text: "🏋️ Track protein targets with MyFitnessPal (Target: 118.8g protein - Weight 66kg x 1.8g).", type: "lifting" }
+            ]
+          },
+          {
+            id: "p1_w2_d2",
+            date: "July 5, 2026",
+            tasks: [
+              { id: "p1_w2_d2_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
+              { id: "p1_w2_d2_t2", text: "🛠 Linux: Practice essential server navigation tools (cd, ls, mkdir, grep, basic SSH setup).", type: "build" },
+              { id: "p1_w2_d2_t3", text: "🏋️ Keep macro tracking consistent on MyFitnessPal.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p1_w2_d3",
+            date: "July 6, 2026",
+            tasks: [
+              { id: "p1_w2_d3_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
+              { id: "p1_w2_d3_t2", text: "🛠 Tools: Set up Postman to manually test the API endpoints of your PYQ portal.", type: "build" },
+              { id: "p1_w2_d3_t3", text: "🏋️ Squat session: Record training metrics and analyze stance depth.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p1_w2_d4",
+            date: "July 7, 2026",
+            tasks: [
+              { id: "p1_w2_d4_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
+              { id: "p1_w2_d4_t2", text: "🛠 Toggle LinkedIn 'Open to Work' for internships.", type: "build" },
+              { id: "p1_w2_d4_t3", text: "🏋️ Review bench press setup: scapular retraction.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p1_w2_d5",
+            date: "July 8, 2026",
+            tasks: [
+              { id: "p1_w2_d5_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
+              { id: "p1_w2_d5_t2", text: "🛠 Linux: practice terminal piping and file search commands.", type: "build" },
+              { id: "p1_w2_d5_t3", text: "🏋️ Focus deadlift bracing: engage lats, pull slack out of bar.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p1_w2_d6",
+            date: "July 9, 2026",
+            tasks: [
+              { id: "p1_w2_d6_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
+              { id: "p1_w2_d6_t2", text: "🛠 Postman: Save endpoints in collection and test response formats.", type: "build" },
+              { id: "p1_w2_d6_t3", text: "🏋️ Powerlifting: Review district calendar timeline milestones.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p1_w2_d7",
+            date: "July 10, 2026",
+            tasks: [
+              { id: "p1_w2_d7_t1", text: "💻 LeetCode Easy daily.", type: "dsa" },
+              { id: "p1_w2_d7_t2", text: "🛠 Write custom Java OOP sample projects using terminal compilation.", type: "build" },
+              { id: "p1_w2_d7_t3", text: "🎤 Voice record a 2-minute walkthrough of the week's accomplishments.", type: "comm" }
+            ]
+          }
         ]
       },
       {
-        wn: 3, label: "Finish Cert + Java Collections + PL Programming", dates: "Jul 11 – Jul 17", intensity: 7,
-        goal: "FINISH Techible cert. Java Collections done. Understand periodization basics.",
+        id: "p1_w3",
+        number: 3,
+        dates: "July 11 - July 17",
+        intensity: 7,
+        focus: "Certification Wrap-up & Core Structures",
         days: [
-          { date: "Sat Jul 11", tasks: [
-            "💻 LeetCode Easy #16: Intersection of Two Arrays",
-            "☕ Java: ArrayList — 5 programs",
-            "📜 Techible cert — 2.5 hrs final push",
-            "🏋️ POWERLIFTING STUDY: Watch 'What is periodization' — Barbell Medicine YouTube",
-            "🏋️ GATE STUDY: Download GATE CS syllabus from gate.iitk.ac.in — read it fully (30 mins)",
-          ]},
-          { date: "Sun Jul 12", tasks: [
-            "💻 LeetCode Easy #17: First Unique Character",
-            "☕ Java: HashMap — word frequency counter",
-            "📜 Techible cert — 2.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'DUP Daily Undulating Periodization explained' — 20 mins",
-            "🏋️ GATE STUDY: Read GATE CS topic list — mark subjects you already know vs don't know",
-          ]},
-          { date: "Mon Jul 13", tasks: [
-            "💻 LeetCode Easy #18: Ransom Note",
-            "☕ Java: HashSet — remove duplicates",
-            "📜 Techible cert — 2.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'How to peak for a powerlifting meet' — Calgary Barbell",
-            "🎓 GATE STUDY: DSA revision — Arrays (you're already doing this on LeetCode, just connect it)",
-          ]},
-          { date: "Tue Jul 14", tasks: [
-            "💻 LeetCode Easy #19: Isomorphic Strings",
-            "☕ Java: String methods",
-            "📜 Techible cert — 2.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'How to choose your opener at a powerlifting meet'",
-            "🎓 GATE STUDY: Watch GATE lecture — Linked Lists (NPTEL or GateSmashers YouTube)",
-          ]},
-          { date: "Wed Jul 15", tasks: [
-            "💻 LeetCode Easy #20: Length of Last Word",
-            "☕ Java: StringBuilder vs String",
-            "📜 Techible cert — 2.5 hrs — aim to FINISH",
-            "🏋️ POWERLIFTING STUDY: Read 'Beginner equipped powerlifting — what gear do you need first'",
-            "🎓 GATE STUDY: Watch GATE lecture — Stacks and Queues (GateSmashers YouTube)",
-          ]},
-          { date: "Thu Jul 16", tasks: [
-            "💻 LeetCode Easy #21: Roman to Integer",
-            "☕ Java: Student Management CLI — ArrayList + HashMap",
-            "📜 FINISH TECHIBLE CERT TODAY — last module, done",
-            "🔗 LinkedIn: add Techible cert — IIT Jammu × Techible immediately",
-            "🎓 GATE STUDY: Watch GATE lecture — Trees (GateSmashers YouTube)",
-          ]},
-          { date: "Fri Jul 17", tasks: [
-            "💻 LeetCode Easy #22 + #23 — double day",
-            "☕ Java: push Student Management CLI to GitHub with README",
-            "🌐 Start MongoDB University Node.js path — first 2 modules",
-            "🏋️ POWERLIFTING STUDY: Watch 'RPE in practice — how to use it in training' — Calgary Barbell",
-            "🎓 GATE STUDY: Watch GATE lecture — Graphs intro (GateSmashers YouTube)",
-          ]},
+          {
+            id: "p1_w3_d1",
+            date: "July 11, 2026",
+            tasks: [
+              { id: "p1_w3_d1_t1", text: "🛠 Finish and submit the final modules of the IIT Jammu x Techible Full-Stack Certification.", type: "build" },
+              { id: "p1_w3_d1_t2", text: "💻 Transition to Java Collections syntax: ArrayList manual coding.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p1_w3_d2",
+            date: "July 12, 2026",
+            tasks: [
+              { id: "p1_w3_d2_t1", text: "🛠 Pin the certification directly on LinkedIn upon completion.", type: "build" },
+              { id: "p1_w3_d2_t2", text: "💻 Java Collections: Write HashMap string frequency algorithms by hand.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p1_w3_d3",
+            date: "July 13, 2026",
+            tasks: [
+              { id: "p1_w3_d3_t1", text: "🎓 Core Data Structures: Master Linked Lists using visualization tools.", type: "academics" },
+              { id: "p1_w3_d3_t2", text: "💻 Solve 1 LeetCode Linked List traversal problem.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p1_w3_d4",
+            date: "July 14, 2026",
+            tasks: [
+              { id: "p1_w3_d4_t1", text: "🎓 Core Data Structures: Study Stack architecture, properties & overflow/underflow.", type: "academics" },
+              { id: "p1_w3_d4_t2", text: "💻 Implement custom stack in Java.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p1_w3_d5",
+            date: "July 15, 2026",
+            tasks: [
+              { id: "p1_w3_d5_t1", text: "🎓 Core Data Structures: Study Queue architecture and dequeue patterns.", type: "academics" },
+              { id: "p1_w3_d5_t2", text: "💻 Implement custom queue in Java using ArrayDeque.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p1_w3_d6",
+            date: "July 16, 2026",
+            tasks: [
+              { id: "p1_w3_d6_t1", text: "💻 Solve 1 LeetCode Stack-based problem (Valid Parentheses).", type: "dsa" },
+              { id: "p1_w3_d6_t2", text: "🎤 Voice record 2-minute explanation of stack vs queue differences.", type: "comm" }
+            ]
+          },
+          {
+            id: "p1_w3_d7",
+            date: "July 17, 2026",
+            tasks: [
+              { id: "p1_w3_d7_t1", text: "🛠 Double check certification updates on LinkedIn page.", type: "build" },
+              { id: "p1_w3_d7_t2", text: "🏋️ Powerlifting: Review squat form and macro target compliance.", type: "lifting" }
+            ]
+          }
         ]
       },
       {
-        wn: 4, label: "DSA Patterns + GATE Foundation + PL Recovery", dates: "Jul 18 – Jul 26", intensity: 7,
-        goal: "Learn DSA patterns. GATE foundation locked. Understand recovery science.",
+        id: "p1_w4",
+        number: 4,
+        dates: "July 18 - July 26",
+        intensity: 7,
+        focus: "Architectural Deep Dive & MNC Prep",
         days: [
-          { date: "Sat Jul 18", tasks: [
-            "💻 LeetCode Easy #24: Two Pointer — Valid Palindrome II",
-            "📺 NeetCode: Two Pointer pattern — 20 mins",
-            "☕ Java: LinkedList traverse",
-            "🏋️ POWERLIFTING STUDY: Watch 'Sleep for strength athletes' — Jeff Nippard (20 mins)",
-            "🎓 GATE STUDY: GateSmashers — Operating Systems intro lecture",
-          ]},
-          { date: "Sun Jul 19", tasks: [
-            "💻 LeetCode #25 + #26: Sliding Window",
-            "📺 NeetCode: Sliding Window pattern",
-            "☕ Java: Stack using ArrayDeque",
-            "🏋️ POWERLIFTING STUDY: Watch 'Carbohydrates for powerlifters — pre and post workout'",
-            "🎓 GATE STUDY: OS — Process vs Thread (GateSmashers YouTube)",
-          ]},
-          { date: "Mon Jul 20", tasks: [
-            "💻 LeetCode Easy #27: Binary Search",
-            "📺 NeetCode: Binary Search pattern",
-            "☕ Java: Queue basics",
-            "🏋️ POWERLIFTING STUDY: Read 'Deload weeks — what they are and when to take them'",
-            "🎓 GATE STUDY: OS — CPU Scheduling algorithms",
-          ]},
-          { date: "Tue Jul 21", tasks: [
-            "💻 LeetCode Easy #28 + #29",
-            "☕ Java: Recursion — factorial + fibonacci",
-            "🌐 MongoDB University — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'How to fix a sticking point in the squat'",
-            "🎓 GATE STUDY: DBMS — ER diagrams and Relational model (GateSmashers)",
-          ]},
-          { date: "Wed Jul 22", tasks: [
-            "💻 LeetCode Easy #30 + #31",
-            "☕ Java: Recursion — binary search recursive",
-            "🌐 MongoDB University — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'Weak point training — how to bring up your deadlift'",
-            "🎓 GATE STUDY: DBMS — Normalization 1NF 2NF 3NF BCNF",
-          ]},
-          { date: "Thu Jul 23", tasks: [
-            "💻 LeetCode Easy #32 + #33",
-            "☕ Java: Two Sum in Java using HashMap",
-            "🌐 MongoDB University — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'How to video review your lifts properly'",
-            "🎓 GATE STUDY: DBMS — SQL queries practice (SELECT, JOIN, GROUP BY)",
-          ]},
-          { date: "Fri Jul 24", tasks: [
-            "💻 LeetCode Easy #34 + #35",
-            "☕ Java: Stack-based calculator mini project",
-            "🌐 MongoDB University — 1.5 hrs",
-            "🏋️ POWERLIFTING STUDY: Watch 'Meet day strategy — openers, 2nd and 3rd attempts'",
-            "🎓 GATE STUDY: CN — OSI model + TCP/IP layers",
-          ]},
-          { date: "Sat Jul 25", tasks: [
-            "💻 LeetCode Easy #36",
-            "📊 Monthly review: 36 problems ✅ Java OOP+Collections ✅ Git ✅ Techible ✅ GATE foundation ✅",
-            "🏋️ POWERLIFTING: Film all 3 lifts today — compare to week 2 films. What improved?",
-            "🧘 Rest well — college starts in 2 days",
-          ]},
-          { date: "Sun Jul 26", tasks: [
-            "💻 LeetCode Easy — 1 problem",
-            "🎒 Prepare for college tomorrow",
-            "🏋️ POWERLIFTING STUDY: Write your competition goal — target total at district meet",
-            "🎤 Full 3-min pitch — name, college, project, skills, what you want. Record it.",
-          ]},
+          {
+            id: "p1_w4_d1",
+            date: "July 18, 2026",
+            tasks: [
+              { id: "p1_w4_d1_t1", text: "💻 Dive into structural patterns (Two-Pointer pattern concepts).", type: "dsa" },
+              { id: "p1_w4_d1_t2", text: "🎓 Core CS: Review DBMS normalization forms (1NF).", type: "academics" }
+            ]
+          },
+          {
+            id: "p1_w4_d2",
+            date: "July 19, 2026",
+            tasks: [
+              { id: "p1_w4_d2_t1", text: "💻 Dive into structural patterns (Sliding Window patterns).", type: "dsa" },
+              { id: "p1_w4_d2_t2", text: "🎓 Core CS: Review DBMS normalization forms (2NF).", type: "academics" }
+            ]
+          },
+          {
+            id: "p1_w4_d3",
+            date: "July 20, 2026",
+            tasks: [
+              { id: "p1_w4_d3_t1", text: "🛠 Reverse-engineer the JWT HTTP-only cookie authentication mechanism inside the PYQ portal.", type: "build" },
+              { id: "p1_w4_d3_t2", text: "🎓 Core CS: Review DBMS normalization forms (3NF).", type: "academics" }
+            ]
+          },
+          {
+            id: "p1_w4_d4",
+            date: "July 21, 2026",
+            tasks: [
+              { id: "p1_w4_d4_t1", text: "🛠 Type the authentication middleware function out from a blank screen.", type: "build" },
+              { id: "p1_w4_d4_t2", text: "🎓 Core CS: Review SQL join syntax (INNER, LEFT, RIGHT, FULL).", type: "academics" }
+            ]
+          },
+          {
+            id: "p1_w4_d5",
+            date: "July 22, 2026",
+            tasks: [
+              { id: "p1_w4_d5_t1", text: "🎤 Weekly Aptitude Practice (Probability & Logical Reasoning screening prep).", type: "comm" },
+              { id: "p1_w4_d5_t2", text: "💻 Solve 2 LeetCode Sliding Window problems.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p1_w4_d6",
+            date: "July 23, 2026",
+            tasks: [
+              { id: "p1_w4_d6_t1", text: "🎤 Weekly Aptitude Practice: Logical Reasoning patterns.", type: "comm" },
+              { id: "p1_w4_d6_t2", text: "💻 Solve 2 LeetCode Two-Pointer problems.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p1_w4_d7",
+            date: "July 24, 2026",
+            tasks: [
+              { id: "p1_w4_d7_t1", text: "💻 Review Phase 1 progress: Target 35+ LeetCode problems fully mastered.", type: "dsa" },
+              { id: "p1_w4_d7_t2", text: "🛠 Authenticate local endpoints using JWT middleware configuration.", type: "build" }
+            ]
+          },
+          {
+            id: "p1_w4_d8",
+            date: "July 25, 2026",
+            tasks: [
+              { id: "p1_w4_d8_t1", text: "🏋️ Equipped powerlifting gear check: wrist wraps and lift chalk.", type: "lifting" },
+              { id: "p1_w4_d8_t2", text: "💻 Solve LeetCode problems to hit targets.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p1_w4_d9",
+            date: "July 26, 2026",
+            tasks: [
+              { id: "p1_w4_d9_t1", text: "🎓 Verify backlog files and prepare for 7th Sem starting tomorrow.", type: "academics" },
+              { id: "p1_w4_d9_t2", text: "🎤 Voice record Phase 1 summary walk-through.", type: "comm" }
+            ]
+          }
         ]
-      },
+      }
     ]
   },
   {
-    id: "p2", label: "Phase 2", sublabel: "7th Sem Beast Mode",
-    dates: "Jul 27 – Dec 2026", color: "#8B5CF6", dim: "#4C1D95",
+    id: "phase2",
+    title: "PHASE 2: 7TH SEM BEAST MODE & BACKLOG ERASURE",
+    dates: "July 27 – December 2026",
+    color: "#8B5CF6",
+    dimColor: "rgba(139, 92, 246, 0.15)",
+    glowColor: "rgba(139, 92, 246, 0.4)",
     weeks: [
       {
-        wn: 5, label: "College Starts + SIH + GATE Serious", dates: "Jul 27 – Aug 9", intensity: 7,
-        goal: "Find SIH SPOC day 1. GATE study daily. PL technique improving.",
+        id: "p2_w5",
+        number: 5,
+        dates: "July 27 - August 9",
+        intensity: 8,
+        focus: "SIH Team Formations & Socket.io",
         days: [
-          { date: "Mon Jul 27 🎓", tasks: [
-            "🏫 Find SIH SPOC (CS faculty) — ask seniors who it is — today",
-            "💻 LeetCode Easy #38 — don't break streak",
-            "🎓 GATE STUDY: DSA — Trees revision (GATE level, not just basics)",
-            "🏋️ POWERLIFTING STUDY: Watch 'How to program your first powerlifting block' — Barbell Medicine",
-          ]},
-          { date: "Tue Jul 28", tasks: [
-            "💻 LeetCode Easy #39",
-            "👥 Form SIH team — 6 people, 1 female mandatory",
-            "🎓 GATE STUDY: DSA — Graph BFS DFS (GateSmashers)",
-            "🏋️ POWERLIFTING STUDY: Read about 'Accumulation vs Intensification phases'",
-          ]},
-          { date: "Wed Jul 29", tasks: [
-            "💻 LeetCode Easy #40 + first Medium attempt (3Sum)",
-            "👥 SIH: team roles assigned — you = full-stack",
-            "🎓 GATE STUDY: Algorithms — sorting algorithms complexity (GateSmashers)",
-            "🏋️ AT GYM: Focus on bracing — hold your brace for every rep, no exceptions",
-          ]},
-          { date: "Thu Jul 30", tasks: [
-            "💻 1 Easy + 1 Medium",
-            "☕ Java: Trees — BFS level order traversal",
-            "🎓 GATE STUDY: Algorithms — Dynamic Programming intro (LCS, knapsack)",
-            "🏋️ POWERLIFTING STUDY: Watch 'Bar path in the squat — what it should look like'",
-          ]},
-          { date: "Fri Jul 31", tasks: [
-            "💻 1 Easy + 1 Medium",
-            "☕ Java: DFS traversals",
-            "🎓 GATE STUDY: Digital Logic — Boolean algebra, K-maps",
-            "🏋️ POWERLIFTING: Film squat again — is bar path vertical? Compare to Alan Thrall video",
-          ]},
-          { date: "Sat Aug 1", tasks: [
-            "💻 2 Medium — grind day",
-            "☕ Java: BST insert + search",
-            "🎓 GATE STUDY: 2 hrs — Computer Organization + Architecture basics",
-            "🏋️ POWERLIFTING STUDY: Watch 'Leg drive on bench press — how it actually works'",
-          ]},
-          { date: "Sun Aug 2", tasks: [
-            "💻 1 Easy",
-            "🌐 MongoDB University — 1 hr",
-            "🎓 GATE STUDY: 1 hr — review week 1 topics",
-            "🏋️ POWERLIFTING: Review your training log — did you hit your sets? Any form breakdowns?",
-            "🧘 8 hrs sleep",
-          ]},
-          { date: "Mon Aug 3 – Sun Aug 9 (Socket.io week)", tasks: [
-            "💻 1 Easy + 1 Medium daily",
-            "🛠 Build Socket.io chat app — server, client, rooms, typing indicator, deploy",
-            "🎓 GATE STUDY: 1.5 hrs daily — OS: Process scheduling, Deadlocks, Memory management",
-            "🏋️ POWERLIFTING STUDY: 30 mins daily — this week focus: Deadlift mechanics deep dive (Barbell Medicine podcast or YouTube)",
-            "🏋️ AT GYM: Deadlift focus — slack pull, lat engagement, keeping bar close",
-          ]},
+          {
+            id: "p2_w5_d1",
+            date: "July 27, 2026",
+            tasks: [
+              { id: "p2_w5_d1_t1", text: "🎓 7th Semester officially starts. Locate classroom blocks.", type: "academics" },
+              { id: "p2_w5_d1_t2", text: "🏆 Locate the SIH 2026 SPOC within the CS department.", type: "hackathon" }
+            ]
+          },
+          {
+            id: "p2_w5_d2",
+            date: "July 28, 2026",
+            tasks: [
+              { id: "p2_w5_d2_t1", text: "🏆 Assemble a balanced 6-member hackathon team (minimum 1 female member mandatory).", type: "hackathon" },
+              { id: "p2_w5_d2_t2", text: "🎓 Isolate 1.5 hours daily for 3rd and 5th-semester backlog coursework.", type: "academics" }
+            ]
+          },
+          {
+            id: "p2_w5_d3",
+            date: "July 29, 2026",
+            tasks: [
+              { id: "p2_w5_d3_t1", text: "🛠 Sandbox Project: Build a real-time Socket.io Chat App completely from scratch to learn web sockets.", type: "build" },
+              { id: "p2_w5_d3_t2", text: "💻 Grind Trees logic patterns.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w5_d4",
+            date: "July 30, 2026",
+            tasks: [
+              { id: "p2_w5_d4_t1", text: "🛠 Socket.io Chat App: Set up server rooms and connection events.", type: "build" },
+              { id: "p2_w5_d4_t2", text: "💻 Grind Graphs logic patterns.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w5_d5",
+            date: "July 31, 2026",
+            tasks: [
+              { id: "p2_w5_d5_t1", text: "🛠 Socket.io Chat App: Establish state sync mechanism.", type: "build" },
+              { id: "p2_w5_d5_t2", text: "🎓 Backlog: Study 3rd sem Object-Oriented Analysis & Design concepts.", type: "academics" }
+            ]
+          },
+          {
+            id: "p2_w5_d6",
+            date: "August 1, 2026",
+            tasks: [
+              { id: "p2_w5_d6_t1", text: "🛠 Socket.io Chat App: Code room joining frontend interface.", type: "build" },
+              { id: "p2_w5_d6_t2", text: "🎓 Backlog: Study 5th sem databases queries.", type: "academics" }
+            ]
+          },
+          {
+            id: "p2_w5_d7",
+            date: "August 2, 2026",
+            tasks: [
+              { id: "p2_w5_d7_t1", text: "💻 Solve 2 LeetCode Tree problems.", type: "dsa" },
+              { id: "p2_w5_d7_t2", text: "🏋️ Heavy squat day: Record bracing metrics.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p2_w5_d8",
+            date: "August 3, 2026",
+            tasks: [
+              { id: "p2_w5_d8_t1", text: "🎓 Attend core 7th-sem lectures: Compiler Design & OS.", type: "academics" },
+              { id: "p2_w5_d8_t2", text: "💻 Solve 2 LeetCode Graph traversal problems.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w5_d9",
+            date: "August 4, 2026",
+            tasks: [
+              { id: "p2_w5_d9_t1", text: "🏆 SIH: Brainstorm problem statement ideas with team.", type: "hackathon" },
+              { id: "p2_w5_d9_t2", text: "🛠 Socket.io Chat App: Build typing indicator states.", type: "build" }
+            ]
+          },
+          {
+            id: "p2_w5_d10",
+            date: "August 5, 2026",
+            tasks: [
+              { id: "p2_w5_d10_t1", text: "💻 Grind Trees traversals algorithms.", type: "dsa" },
+              { id: "p2_w5_d10_t2", text: "🎓 Backlog: Study 3rd sem OS structures.", type: "academics" }
+            ]
+          },
+          {
+            id: "p2_w5_d11",
+            date: "August 6, 2026",
+            tasks: [
+              { id: "p2_w5_d11_t1", text: "🛠 Socket.io Chat App: Integrate database logs storage.", type: "build" },
+              { id: "p2_w5_d11_t2", text: "🏋️ Powerlifting: Focus on equipped bench setup.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p2_w5_d12",
+            date: "August 7, 2026",
+            tasks: [
+              { id: "p2_w5_d12_t1", text: "🎓 Backlog: Study 3rd sem Data Structures theory.", type: "academics" },
+              { id: "p2_w5_d12_t2", text: "🎤 Voice record a 2-minute project architecture overview.", type: "comm" }
+            ]
+          },
+          {
+            id: "p2_w5_d13",
+            date: "August 8, 2026",
+            tasks: [
+              { id: "p2_w5_d13_t1", text: "🛠 Socket.io Chat App: Push code to Github, write README.md.", type: "build" },
+              { id: "p2_w5_d13_t2", text: "💻 Solve 1 Graph Dijkstra's algorithm problem.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w5_d14",
+            date: "August 9, 2026",
+            tasks: [
+              { id: "p2_w5_d14_t1", text: "🏆 SIH: Run prototype database design checks.", type: "hackathon" },
+              { id: "p2_w5_d14_t2", text: "🏋️ Rest and recovery validation.", type: "lifting" }
+            ]
+          }
         ]
       },
       {
-        wn: 6, label: "SIH Sep 6 Deadline + 80 Problems", dates: "Aug 10 – Sep 6", intensity: 9,
-        goal: "SIH submitted. 80 LeetCode. GATE OS done. PL programming understood.",
+        id: "p2_w6",
+        number: 6,
+        dates: "August 10 - September 6",
+        intensity: 9,
+        focus: "SIH Prototypes Sprint & Portfolio",
         days: [
-          { date: "Aug 10 – Aug 23 (2 weeks)", tasks: [
-            "💻 2 Medium daily — push toward 80",
-            "🏆 SIH: build prototype → wireframe → internal hackathon → perform → submit",
-            "🎓 GATE STUDY: 1.5 hrs daily — DBMS (complete), CN (complete OSI+TCP/IP+routing)",
-            "🏋️ POWERLIFTING STUDY: 30 mins daily — this fortnight: Programming (DUP, block periodization, volume landmarks MEV/MAV/MRV)",
-            "🏋️ ACTION: Design your own 8-week training block using DUP principles",
-            "🌐 Portfolio website: build and deploy on Vercel",
-          ]},
-          { date: "Aug 24 – Sep 6 (final push)", tasks: [
-            "💻 2 Medium daily — reach 80 problems total ✅",
-            "🏆 SIH: polish demo, practice pitch, submit before Sep 6 HARD DEADLINE",
-            "🎓 GATE STUDY: 1.5 hrs daily — Compiler Design basics (lexical analysis, parsing, CFG)",
-            "🏋️ POWERLIFTING STUDY: 30 mins daily — Peaking: how to peak for a meet, tapering, attempt selection",
-            "🏋️ AT GYM: Start filming every session — build a video bank to review weekly",
-          ]},
-          { date: "Sun Sep 6 ⚠️ SIH DEADLINE", tasks: [
-            "🏆 SIH 2026 REGISTRATION CONFIRMED ✅",
-            "💻 1 Medium — keep streak",
-            "🎓 GATE: quick review of all topics done so far",
-            "🏋️ POWERLIFTING: Write your competition attempt plan — opener, 2nd, 3rd for each lift",
-            "🧘 Rest + train + sleep",
-          ]},
+          {
+            id: "p2_w6_d1",
+            date: "August 10, 2026",
+            tasks: [
+              { id: "p2_w6_d1_t1", text: "🏆 SIH: Run rapid team sprint to wireframe the core product.", type: "hackathon" },
+              { id: "p2_w6_d1_t2", text: "💻 DSA: Kadane’s Algorithm (LeetCode Medium).", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w6_d2",
+            date: "August 15, 2026",
+            tasks: [
+              { id: "p2_w6_d2_t1", text: "🏆 SIH: Build mock schema endpoints and deploy initial server APIs.", type: "hackathon" },
+              { id: "p2_w6_d2_t2", text: "💻 DSA: 3Sum (LeetCode Medium).", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w6_d3",
+            date: "August 20, 2026",
+            tasks: [
+              { id: "p2_w6_d3_t1", text: "🏆 SIH: Complete dashboard layout frontend client integration.", type: "hackathon" },
+              { id: "p2_w6_d3_t2", text: "💻 DSA: Merge Intervals (LeetCode Medium).", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w6_d4",
+            date: "August 25, 2026",
+            tasks: [
+              { id: "p2_w6_d4_t1", text: "🛠 Build: Launch React Minimalist Portfolio Site highlighting live links.", type: "build" },
+              { id: "p2_w6_d4_t2", text: "💻 DSA: Grind 2 LeetCode Mediums daily.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w6_d5",
+            date: "August 30, 2026",
+            tasks: [
+              { id: "p2_w6_d5_t1", text: "🏆 SIH: Run final integration testing and deploy live URL.", type: "hackathon" },
+              { id: "p2_w6_d5_t2", text: "💻 DSA: Grind 2 LeetCode Mediums daily.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w6_d6",
+            date: "September 5, 2026",
+            tasks: [
+              { id: "p2_w6_d6_t1", text: "🏆 SIH: Run final product walk-through and compile PDF presentation.", type: "hackathon" },
+              { id: "p2_w6_d6_t2", text: "🎤 Perform mock presentation pitching and review gaps.", type: "comm" }
+            ]
+          },
+          {
+            id: "p2_w6_d7",
+            date: "September 6, 2026",
+            tasks: [
+              { id: "p2_w6_d7_t1", text: "🏆 SIH: SIH 2026 registration closes strictly today. Finalize submission.", type: "hackathon" },
+              { id: "p2_w6_d7_t2", text: "💻 DSA: 2 LeetCode Mediums to preserve streak.", type: "dsa" }
+            ]
+          }
         ]
       },
       {
-        wn: 7, label: "100 Problems + GATE Mocks + PL Competition Prep", dates: "Sep 7 – Oct 2026", intensity: 9,
-        goal: "100 problems. First GATE mock. Understand competition day execution.",
+        id: "p2_w7",
+        number: 7,
+        dates: "September 7 - October 2026",
+        intensity: 9,
+        focus: "LeetCode 100+ & Pramp Interviews",
         days: [
-          { date: "Sep 7 – Sep 28 (3 weeks)", tasks: [
-            "💻 2 Medium daily — push to 100 problems ✅",
-            "🎯 Pramp.com: first mock interview — register and schedule",
-            "🎓 GATE STUDY: 2 hrs daily — Theory of Computation (DFA, NFA, PDA, Turing machines)",
-            "🎓 GATE: Take first GATE mock test on testbook.com or gatebook.in — see where you stand",
-            "🏋️ POWERLIFTING STUDY: 30 mins daily — Competition week: water cut basics, glycogen loading, weigh-in recovery, meet day nutrition",
-            "🏋️ AT GYM: Practice competition commands — squat rack, start, press/rack, down command timing",
-            "📚 7th sem — 1.5 hr study daily (backlogs priority)",
-          ]},
-          { date: "October 2026 (ongoing)", tasks: [
-            "💻 2 Medium daily — push to 120 total",
-            "🏆 SIH national finale if qualified — GO, worth it",
-            "🎓 GATE STUDY: 2 hrs daily — Math (Linear Algebra, Probability, Calculus basics for GATE)",
-            "🎓 GATE: Take mock test every 2 weeks — track score improvement",
-            "🏋️ DISTRICT POWERLIFTING COMPETITION — confirm date with @ts_powerlifting",
-            "🏋️ POWERLIFTING STUDY: Psychology — competition mindset, managing nerves, attempt aggression",
-            "📚 7th sem — 2 hr study daily",
-          ]},
+          {
+            id: "p2_w7_d1",
+            date: "September 7, 2026",
+            tasks: [
+              { id: "p2_w7_d1_t1", text: "💻 DSA: Cross the milestone of 100+ LeetCode problems.", type: "dsa" },
+              { id: "p2_w7_d1_t2", text: "🏋️ 2027 District Prep: Commit to a dedicated strength block. Record squat logs.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p2_w7_d2",
+            date: "September 14, 2026",
+            tasks: [
+              { id: "p2_w7_d2_t1", text: "💻 Formulate technical fluency: Pramp.com mock interview. Practice 'Think Aloud'.", type: "dsa" },
+              { id: "p2_w7_d2_t2", text: "🏋️ Record squat logs and monitor stance changes.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p2_w7_d3",
+            date: "September 21, 2026",
+            tasks: [
+              { id: "p2_w7_d3_t1", text: "💻 Solve 2 LeetCode Mediums on Graph algorithms.", type: "dsa" },
+              { id: "p2_w7_d3_t2", text: "🏋️ Record deadlift logs, focus on bracing alignment.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p2_w7_d4",
+            date: "September 28, 2026",
+            tasks: [
+              { id: "p2_w7_d4_t1", text: "💻 Pramp.com mock coding interview: Solve array challenges.", type: "dsa" },
+              { id: "p2_w7_d4_t2", text: "🏋️ Record bench press training metrics.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p2_w7_d5",
+            date: "October 5, 2026",
+            tasks: [
+              { id: "p2_w7_d5_t1", text: "💻 Solve 2 LeetCode Mediums on Dynamic Programming patterns.", type: "dsa" },
+              { id: "p2_w7_d5_t2", text: "🏋️ Maintain consistency in evening lifting schedules.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p2_w7_d6",
+            date: "October 15, 2026",
+            tasks: [
+              { id: "p2_w7_d6_t1", text: "💻 Pramp.com mock coding interview: Solve graph algorithms.", type: "dsa" },
+              { id: "p2_w7_d6_t2", text: "🏋️ Powerlifting strength block evaluation.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p2_w7_d7",
+            date: "October 31, 2026",
+            tasks: [
+              { id: "p2_w7_d7_t1", text: "💻 Complete weekly LeetCode review checklist.", type: "dsa" },
+              { id: "p2_w7_d7_t2", text: "🏋️ Verify bracing stability under maximum loads.", type: "lifting" }
+            ]
+          }
         ]
       },
       {
-        wn: 8, label: "Nov–Dec: Exam Crunch + Clear Backlogs", dates: "Nov – Dec 2026", intensity: 10,
-        goal: "CLEAR ALL 5 BACKLOGS. GATE prep at full pace. PL state comp target.",
+        id: "p2_w8",
+        number: 8,
+        dates: "November - December 2026",
+        intensity: 10,
+        focus: "Backlogs Erasure & Semester Finals",
         days: [
-          { date: "November (ongoing)", tasks: [
-            "💻 2 Medium daily — 130+ total",
-            "🎯 Pramp mock interview weekly",
-            "🎓 GATE STUDY: 2.5 hrs daily — previous year GATE questions topic-wise (go to GATECSE.in)",
-            "🏋️ POWERLIFTING STUDY: Advanced technique — weak point analysis, compensatory acceleration, intent-based lifting",
-            "🏋️ COMPETITION: District meet this window — COMPETE. First meet ever. Just finish all attempts.",
-            "📚 7th sem — 3 hr study daily (exam crunch)",
-          ]},
-          { date: "December exams", tasks: [
-            "📚 Study 4 hrs daily — backlog subjects FIRST (3rd sem: 4 backs, 5th sem: 1 back)",
-            "💻 1 Easy daily — keep streak even in exams (10 mins)",
-            "🎓 GATE STUDY: 1 hr daily even during sem exams — don't lose momentum",
-            "🏋️ POWERLIFTING: Maintain training — even 45 min session counts during exam week",
-            "😴 8 hrs sleep — no all-nighters",
-          ]},
-          { date: "Post-exams (sem break)", tasks: [
-            "📊 All backlogs cleared ✅",
-            "🎓 GATE: Full-time prep begins — 4 hrs daily from now until Feb",
-            "🏋️ POWERLIFTING STUDY: Long-term development — annual planning, hypertrophy phases vs strength phases",
-            "📅 Mark April 2027 in calendar — Goldman Sachs Hackathon",
-            "🌐 Resume update — add chat app, open source, portfolio link",
-          ]},
+          {
+            id: "p2_w8_d1",
+            date: "November 1, 2026",
+            tasks: [
+              { id: "p2_w8_d1_t1", text: "🎓 Academics: Dedicate 4 hours daily to erasing all 5 pending backlogs.", type: "academics" },
+              { id: "p2_w8_d1_t2", text: "💻 DSA: Maintain LeetCode streak (1 targeted problem daily).", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w8_d2",
+            date: "November 10, 2026",
+            tasks: [
+              { id: "p2_w8_d2_t1", text: "🎓 Academics: Deep-dive into 3rd-semester backlog syllabus revision.", type: "academics" },
+              { id: "p2_w8_d2_t2", text: "💻 DSA: 1 targeted problem to keep streak.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w8_d3",
+            date: "November 20, 2026",
+            tasks: [
+              { id: "p2_w8_d3_t1", text: "🎓 Academics: Deep-dive into 5th-semester backlog syllabus revision.", type: "academics" },
+              { id: "p2_w8_d3_t2", text: "💻 DSA: LeetCode Easy/Medium daily.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w8_d4",
+            date: "December 1, 2026",
+            tasks: [
+              { id: "p2_w8_d4_t1", text: "🎓 Academics: Practice answering backlog papers using CUJ PYQ Portal.", type: "academics" },
+              { id: "p2_w8_d4_t2", text: "💻 DSA: Keep streak alive.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w8_d5",
+            date: "December 10, 2026",
+            tasks: [
+              { id: "p2_w8_d5_t1", text: "🎓 Academics: Backlog exams commencement - study 4 hours daily.", type: "academics" },
+              { id: "p2_w8_d5_t2", text: "💻 DSA: LeetCode daily problem.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w8_d6",
+            date: "December 20, 2026",
+            tasks: [
+              { id: "p2_w8_d6_t1", text: "🎓 Academics: 7th-semester regular examinations commencement.", type: "academics" },
+              { id: "p2_w8_d6_t2", text: "💻 DSA: Keep streak alive.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p2_w8_d7",
+            date: "December 31, 2026",
+            tasks: [
+              { id: "p2_w8_d7_t1", text: "🎓 Academics: Confirm all 5 backlogs cleared successfully for 6.97+ final graduation CGPA.", type: "academics" },
+              { id: "p2_w8_d7_t2", text: "💻 DSA: Target 130+ LeetCode problems documented.", type: "dsa" }
+            ]
+          }
         ]
-      },
+      }
     ]
   },
   {
-    id: "p3", label: "Phase 3", sublabel: "GATE + Applications",
-    dates: "Jan – Feb 2027", color: "#EF4444", dim: "#7F1D1D",
+    id: "phase3",
+    title: "PHASE 3: STARTUP INTERNSHIP BLITZ & ATHLETIC PLATFORM PREP",
+    dates: "January – February 2027",
+    color: "#EF4444",
+    dimColor: "rgba(239, 68, 68, 0.15)",
+    glowColor: "rgba(239, 68, 68, 0.4)",
     weeks: [
       {
-        wn: 9, label: "GATE Full Prep + Applications Open", dates: "Jan 2027", intensity: 10,
-        goal: "GATE full prep 4 hrs daily. 10 internship applications per week. 150 problems.",
+        id: "p3_w9",
+        number: 9,
+        dates: "January 2027",
+        intensity: 10,
+        focus: "LeetCode 150+ & STAR Framework Profiles",
         days: [
-          { date: "Week 1 Jan", tasks: [
-            "💻 3 Medium daily — push to 150 total",
-            "🎓 GATE: 4 hrs daily — DSA + Algorithms full revision (your strongest section)",
-            "🌐 Internshala: apply 5 internships daily (₹10k+ stipend, Full Stack)",
-            "🔗 LinkedIn: 5 cold messages to founders daily",
-            "🏋️ POWERLIFTING STUDY: Nervous system adaptation — motor unit recruitment, firing rate, neural efficiency",
-          ]},
-          { date: "Week 2 Jan", tasks: [
-            "💻 3 Medium daily",
-            "🎓 GATE: 4 hrs daily — OS + DBMS (your 2 weakest — more time here)",
-            "🌐 Wellfound.com: apply 5 startups",
-            "🎯 Pramp mock interview weekly",
-            "🏋️ POWERLIFTING STUDY: Advanced programming — block periodization, accumulation-intensification-realization",
-          ]},
-          { date: "Week 3 Jan", tasks: [
-            "💻 2 Medium daily — 150 milestone ✅",
-            "🎓 GATE: 4 hrs daily — Compiler Design + TOC revision",
-            "🎓 GATE: Take mock test — target 40+ marks now",
-            "🌐 40+ applications sent total ✅",
-            "🏋️ STATE COMPETITION PREP: Design 8-week peaking block leading to Feb–Mar state meet",
-          ]},
-          { date: "Week 4 Jan", tasks: [
-            "💻 2 Medium daily",
-            "🎓 GATE: 4 hrs daily — CN + Digital Logic + COA full revision",
-            "🎓 GATE: Mock test — track time management",
-            "🔗 Follow up all pending applications",
-            "🏋️ POWERLIFTING: Intensification phase starts — heavier weights, lower volume",
-          ]},
+          {
+            id: "p3_w9_d1",
+            date: "January 1, 2027",
+            tasks: [
+              { id: "p3_w9_d1_t1", text: "💻 DSA: Hit 3 LeetCode Mediums daily.", type: "dsa" },
+              { id: "p3_w9_d1_t2", text: "🛠 Career: Scale applications to 5 startups per day via Wellfound.", type: "build" }
+            ]
+          },
+          {
+            id: "p3_w9_d2",
+            date: "January 5, 2027",
+            tasks: [
+              { id: "p3_w9_d2_t1", text: "💻 DSA: Grind 3 LeetCode Mediums daily.", type: "dsa" },
+              { id: "p3_w9_d2_t2", text: "🛠 Career: Scale applications to 5 startups per day via Internshala.", type: "build" }
+            ]
+          },
+          {
+            id: "p3_w9_d3",
+            date: "January 10, 2027",
+            tasks: [
+              { id: "p3_w9_d3_t1", text: "💻 DSA: Break the 150+ problem milestone.", type: "dsa" },
+              { id: "p3_w9_d3_t2", text: "🛠 Career: Format behavioral answers utilizing the STAR framework mapped to actual PYQ portal deployment hurdles.", type: "build" }
+            ]
+          },
+          {
+            id: "p3_w9_d4",
+            date: "January 15, 2027",
+            tasks: [
+              { id: "p3_w9_d4_t1", text: "💻 DSA: Solve LeetCode problems on graphs and backtracking.", type: "dsa" },
+              { id: "p3_w9_d4_t2", text: "🛠 Career: Wellfound applications tracking updates.", type: "build" }
+            ]
+          },
+          {
+            id: "p3_w9_d5",
+            date: "January 20, 2027",
+            tasks: [
+              { id: "p3_w9_d5_t1", text: "💻 DSA: Hit 3 LeetCode Mediums.", type: "dsa" },
+              { id: "p3_w9_d5_t2", text: "🛠 Career: Apply for paid Sem 8 startup SDE internships.", type: "build" }
+            ]
+          },
+          {
+            id: "p3_w9_d6",
+            date: "January 25, 2027",
+            tasks: [
+              { id: "p3_w9_d6_t1", text: "💻 DSA: Grind Medium problems.", type: "dsa" },
+              { id: "p3_w9_d6_t2", text: "🎤 Practice mock behavioral questions with video recordings.", type: "comm" }
+            ]
+          },
+          {
+            id: "p3_w9_d7",
+            date: "January 31, 2027",
+            tasks: [
+              { id: "p3_w9_d7_t1", text: "💻 DSA: 150+ milestone completed and documented.", type: "dsa" },
+              { id: "p3_w9_d7_t2", text: "🛠 Career: Follow up on screening test evaluations.", type: "build" }
+            ]
+          }
         ]
       },
       {
-        wn: 10, label: "GATE Exam + Interviews Coming In", dates: "Feb 2027", intensity: 10,
-        goal: "GATE exam. Keep interview pipeline moving. PL peak begins.",
+        id: "p3_w10",
+        number: 10,
+        dates: "February 2027",
+        intensity: 10,
+        focus: "District Meet Launch & SDE Interfacing",
         days: [
-          { date: "Week 1–2 Feb (pre-GATE)", tasks: [
-            "🎓 GATE: 5 hrs daily — full syllabus revision, 1 mock test every 2 days",
-            "💻 1 LeetCode daily — maintain but don't overdo it",
-            "🌐 Keep applying — 5 per week minimum",
-            "🏋️ POWERLIFTING: Peak week begins — reduce volume, increase intensity",
-            "😴 8 hrs sleep — non negotiable before GATE",
-          ]},
-          { date: "🎓 GATE 2027 EXAM DAY", tasks: [
-            "🎓 GATE EXAM — give it everything you have",
-            "Eat well. Arrive early. Read every question fully before answering.",
-            "Don't leave early — review everything",
-            "🌙 Sleep early night before. No last-minute cramming.",
-          ]},
-          { date: "Post-GATE (rest of Feb)", tasks: [
-            "🎉 GATE done — take 2 days off completely",
-            "💻 3 Medium daily — back to full grind",
-            "🌐 Internship applications — 10 per week — full attack mode now",
-            "🎯 Pramp mock interviews — 2 per week now",
-            "🏋️ POWERLIFTING: State competition likely Feb–Mar — COMPETE",
-          ]},
+          {
+            id: "p3_w10_d1",
+            date: "February 1, 2027",
+            tasks: [
+              { id: "p3_w10_d1_t1", text: "🛠 Career: High-volume SDE internship application follow-ups.", type: "build" },
+              { id: "p3_w10_d1_t2", text: "🏋️ Powerlifting Meet Action: Submit your official Telangana Powerlifting Association (TPA) annual athlete card registration (Aadhaar, photo, fee processing).", type: "lifting" }
+            ]
+          },
+          {
+            id: "p3_w10_d2",
+            date: "February 5, 2027",
+            tasks: [
+              { id: "p3_w10_d2_t1", text: "🛠 Career: Follow up with recruiters on Wellfound.", type: "build" },
+              { id: "p3_w10_d2_t2", text: "🏋️ Powerlifting Meet Action: Submit the specific 66kg Equipped Category District Entry form.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p3_w10_d3",
+            date: "February 10, 2027",
+            tasks: [
+              { id: "p3_w10_d3_t1", text: "🛠 Career: Mock technical interviews (System Design & DS).", type: "build" },
+              { id: "p3_w10_d3_t2", text: "🏋️ Powerlifting: Attempt selections based on heavy lift singles.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p3_w10_d4",
+            date: "February 15, 2027",
+            tasks: [
+              { id: "p3_w10_d4_t1", text: "💻 DSA: Solve 1 LeetCode Medium problem.", type: "dsa" },
+              { id: "p3_w10_d4_t2", text: "🏋️ Powerlifting: Equipped gear checks and platform command runs.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p3_w10_d5",
+            date: "February 20, 2027",
+            tasks: [
+              { id: "p3_w10_d5_t1", text: "🎤 Career: Review STAR framework project summaries.", type: "comm" },
+              { id: "p3_w10_d5_t2", text: "🏋️ Powerlifting: Begin light stretching and recovery routine.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p3_w10_d6",
+            date: "February 25, 2027",
+            tasks: [
+              { id: "p3_w10_d6_t1", text: "🛠 Career: Target internship contract signing.", type: "build" },
+              { id: "p3_w10_d6_t2", text: "🏋️ Powerlifting: Manage nutritional water/food intake to nail the official 2-hour pre-meet weigh-in scale.", type: "lifting" }
+            ]
+          },
+          {
+            id: "p3_w10_d7",
+            date: "February 28, 2027",
+            tasks: [
+              { id: "p3_w10_d7_t1", text: "🏋️ Powerlifting: Compete at the District Meet, executing all 9 command-timed platform attempts.", type: "lifting" },
+              { id: "p3_w10_d7_t2", text: "🎤 Complete post-meet raw reflection recording.", type: "comm" }
+            ]
+          }
         ]
-      },
+      }
     ]
   },
   {
-    id: "p4", label: "Phase 4", sublabel: "Offer & Day 1",
-    dates: "Mar – Apr 2027", color: "#10B981", dim: "#064E3B",
+    id: "phase4",
+    title: "PHASE 4: CORPORATE RUNWAY & MNC CONQUEST",
+    dates: "March 2027 Onwards",
+    color: "#10B981",
+    dimColor: "rgba(16, 185, 129, 0.15)",
+    glowColor: "rgba(16, 185, 129, 0.4)",
     weeks: [
       {
-        wn: 11, label: "Final Interview Rounds + Offer", dates: "Mar – Apr 2027", intensity: 8,
-        goal: "One yes is all it takes. Execute. Stay calm.",
+        id: "p4_w11",
+        number: 11,
+        dates: "March - May 2027",
+        intensity: 8,
+        focus: "Startup Internship & Infrastructure",
         days: [
-          { date: "Every interview day", tasks: [
-            "🎯 60-sec intro — confident, specific, don't ramble",
-            "🎯 DSA round — think out loud, don't code silently",
-            "🎯 Project round — go deep on decisions, not just features",
-            "🎯 Ask 2 questions at end — shows genuine interest",
-            "😴 Sleep 8 hrs night before every interview",
-          ]},
-          { date: "After every interview", tasks: [
-            "📝 Write every question they asked — build your question bank",
-            "📝 What did you get wrong? Practice that specifically tomorrow",
-            "💻 2 Medium daily — keep streak",
-            "📧 Send thank you email within 24 hrs",
-          ]},
-          { date: "Weekly Mar–Apr", tasks: [
-            "🌐 10 applications per week — never stop even while interviewing",
-            "🎯 Pramp weekly",
-            "🏋️ POWERLIFTING: Off-season begins after state — hypertrophy phase, higher volume",
-            "🏋️ POWERLIFTING STUDY: Long-term planning — annual training calendar, bulking phase management",
-            "💻 Push to 180+ problems",
-          ]},
-          { date: "🎉 OFFER RECEIVED", tasks: [
-            "✅ Accept the offer — negotiate if very low",
-            "📧 Email manager: 'What should I prepare before Day 1?'",
-            "🔍 Read company's tech stack deeply",
-            "📓 Set up Notion — take notes every day at internship",
-          ]},
-          { date: "🚀 DAY 1 OF INTERNSHIP", tasks: [
-            "Introduce yourself: builder, shipped real things, here to learn",
-            "📓 Take notes on EVERYTHING — people, codebase, processes",
-            "🙋 Ask questions — never pretend to understand what you don't",
-            "🌙 Come home, write what you learned today",
-            "You started from zero and made it here. That's real. 🔥",
-          ]},
+          {
+            id: "p4_w11_d1",
+            date: "March 1, 2027",
+            tasks: [
+              { id: "p4_w11_d1_t1", text: "🛠 Career: Onboard at your 6-month startup SDE internship. Configure local workspace.", type: "build" },
+              { id: "p4_w11_d1_t2", text: "💻 DSA: Maintain LeetCode problem count.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p4_w11_d2",
+            date: "March 15, 2027",
+            tasks: [
+              { id: "p4_w11_d2_t1", text: "🛠 Career: Write backend integration tests using Jest for api layers.", type: "build" },
+              { id: "p4_w11_d2_t2", text: "💻 DSA: Grind 1 LeetCode daily.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p4_w11_d3",
+            date: "April 1, 2027",
+            tasks: [
+              { id: "p4_w11_d3_t1", text: "🛠 Career: Study production deployment infrastructure (Docker files & parameters).", type: "build" },
+              { id: "p4_w11_d3_t2", text: "💻 DSA: Grind 1 LeetCode daily.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p4_w11_d4",
+            date: "April 15, 2027",
+            tasks: [
+              { id: "p4_w11_d4_t1", text: "🛠 Career: Study production deployment infrastructure (AWS fundamentals).", type: "build" },
+              { id: "p4_w11_d4_t2", text: "💻 DSA: Keep count up to 180+ problems.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p4_w11_d5",
+            date: "May 1, 2027",
+            tasks: [
+              { id: "p4_w11_d5_t1", text: "🛠 Career: Complete minor features at internship.", type: "build" },
+              { id: "p4_w11_d5_t2", text: "💻 DSA: Maintain streak." }
+            ]
+          },
+          {
+            id: "p4_w11_d6",
+            date: "May 15, 2027",
+            tasks: [
+              { id: "p4_w11_d6_t1", text: "🛠 Career: Optimize SQL queries and query caching systems.", type: "build" },
+              { id: "p4_w11_d6_t2", text: "💻 DSA: Keep streak." }
+            ]
+          },
+          {
+            id: "p4_w11_d7",
+            date: "May 31, 2027",
+            tasks: [
+              { id: "p4_w11_d7_t1", text: "🛠 Career: Document internship achievements for resume optimization.", type: "build" },
+              { id: "p4_w11_d7_t2", text: "💻 DSA: Maintain problem count to clear 180+ threshold.", type: "dsa" }
+            ]
+          }
         ]
       },
+      {
+        id: "p4_w12",
+        number: 12,
+        dates: "June 2027+",
+        intensity: 9,
+        focus: "MNC Referral Blitz & SDE-1 Offer",
+        days: [
+          {
+            id: "p4_w12_d1",
+            date: "June 1, 2027",
+            tasks: [
+              { id: "p4_w12_d1_t1", text: "🛠 Career: Leverage 6 months of corporate SDE experience to bypass automated resume filters.", type: "build" },
+              { id: "p4_w12_d1_t2", text: "🛠 Career: Initiate targeted LinkedIn Referral Strategy with SDE leads.", type: "build" }
+            ]
+          },
+          {
+            id: "p4_w12_d2",
+            date: "June 5, 2027",
+            tasks: [
+              { id: "p4_w12_d2_t1", text: "🛠 Career: Target SDE-1 roles at Amazon, Adobe, Microsoft.", type: "build" },
+              { id: "p4_w12_d2_t2", text: "🎤 Practice cold outreach templates and pitches.", type: "comm" }
+            ]
+          },
+          {
+            id: "p4_w12_d3",
+            date: "June 10, 2027",
+            tasks: [
+              { id: "p4_w12_d3_t1", text: "🛠 Career: Reach out to SDE leads at Amazon.", type: "build" },
+              { id: "p4_w12_d3_t2", text: "💻 DSA: Solve Amazon-specific coding rounds problems.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p4_w12_d4",
+            date: "June 15, 2027",
+            tasks: [
+              { id: "p4_w12_d4_t1", text: "🛠 Career: Reach out to SDE leads at Microsoft.", type: "build" },
+              { id: "p4_w12_d4_t2", text: "💻 DSA: Solve Microsoft-specific coding rounds problems.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p4_w12_d5",
+            date: "June 20, 2027",
+            tasks: [
+              { id: "p4_w12_d5_t1", text: "🛠 Career: Reach out to SDE leads at Adobe.", type: "build" },
+              { id: "p4_w12_d5_t2", text: "💻 DSA: Solve Adobe-specific coding rounds problems.", type: "dsa" }
+            ]
+          },
+          {
+            id: "p4_w12_d6",
+            date: "June 25, 2027",
+            tasks: [
+              { id: "p4_w12_d6_t1", text: "🛠 Career: Practice mock System Design rounds.", type: "build" },
+              { id: "p4_w12_d6_t2", text: "🎤 Mock behavioral interview sessions.", type: "comm" }
+            ]
+          },
+          {
+            id: "p4_w12_d7",
+            date: "June 30, 2027",
+            tasks: [
+              { id: "p4_w12_d7_t1", text: "🛠 Career: Transition from startup intern directly into a full-time, high-paying SDE-1 role.", type: "build" },
+              { id: "p4_w12_d7_t2", text: "🎓 Academics: Complete graduation from CUJ with definitive 6.97+ final graduation CGPA.", type: "academics" }
+            ]
+          }
+        ]
+      }
     ]
-  },
+  }
 ];
 
-const INTENSITY_BAR = ["","#93C5FD","#60A5FA","#3B82F6","#2563EB","#A78BFA","#8B5CF6","#EF4444","#DC2626","#B91C1C","#7F1D1D"];
-const INTENSITY_LABEL = ["","Easy","Easy+","Moderate","Moderate+","Hard","Hard+","Very Hard","Very Hard+","Extreme","MAX 🔥"];
-
-const TAG_COLOR = (t) => {
-  if (t.startsWith("🎓 GATE")) return "#FEF3C7";
-  if (t.startsWith("🏋️ POWERLIFTING") || t.startsWith("🏋️ AT GYM") || t.startsWith("🏋️ ACTION") || t.startsWith("🏋️ COMPETITION") || t.startsWith("🏋️ STATE") || t.startsWith("🏋️ DISTRICT")) return "#D1FAE5";
-  if (t.startsWith("💻")) return "#DBEAFE";
-  if (t.startsWith("🛠") || t.startsWith("☕")) return "#EDE9FE";
-  if (t.startsWith("🏆")) return "#FEE2E2";
-  if (t.startsWith("🎤")) return "#FCE7F3";
-  if (t.startsWith("🔗") || t.startsWith("🌐")) return "#E0E7FF";
-  return "#F1F5F9";
+const INTENSITY_COLORS = {
+  1: "#93C5FD", 2: "#60A5FA", 3: "#3B82F6", 4: "#2563EB", 
+  5: "#A78BFA", 6: "#8B5CF6", 7: "#F59E0B", 8: "#D97706",
+  9: "#EF4444", 10: "#DC2626"
 };
 
-const TAG_TEXT = (t) => {
-  if (t.startsWith("🎓 GATE")) return "#92400E";
-  if (t.startsWith("🏋️")) return "#065F46";
-  if (t.startsWith("💻")) return "#1E40AF";
-  if (t.startsWith("🛠") || t.startsWith("☕")) return "#5B21B6";
-  if (t.startsWith("🏆")) return "#991B1B";
-  if (t.startsWith("🎤")) return "#9D174D";
-  if (t.startsWith("🔗") || t.startsWith("🌐")) return "#3730A3";
-  return "#334155";
+const INTENSITY_LABELS = {
+  1: "Easy", 2: "Easy+", 3: "Moderate", 4: "Moderate+",
+  5: "Hard", 6: "Hard+", 7: "Very Hard", 8: "Very Hard+",
+  9: "Extreme", 10: "MAX 🔥"
 };
+
+const FILTERS = [
+  { key: "all", label: "All Tasks", emoji: "⚡" },
+  { key: "dsa", label: "DSA", emoji: "💻" },
+  { key: "build", label: "Build/Java", emoji: "🛠" },
+  { key: "academics", label: "Academics", emoji: "🎓" },
+  { key: "lifting", label: "Powerlifting", emoji: "🏋️" },
+  { key: "comm", label: "Communication", emoji: "🎤" }
+];
 
 export default function App() {
-  const [phase, setPhase] = useState(0);
-  const [week, setWeek] = useState(0);
-  const [open, setOpen] = useState(null);
-  const [done, setDone] = useState({});
-  const [filter, setFilter] = useState("all");
+  // State management with localStorage persistence
+  const [completedTasks, setCompletedTasks] = useState(() => {
+    try {
+      const saved = localStorage.getItem("prince_tracker_completed_tasks");
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
 
-  const p = PHASES[phase];
-  const w = p.weeks[week];
+  const [expandedPhases, setExpandedPhases] = useState(() => {
+    try {
+      const saved = localStorage.getItem("prince_tracker_expanded_phases");
+      // Default Phase 1 to expanded
+      return saved ? JSON.parse(saved) : { phase1: true };
+    } catch {
+      return { phase1: true };
+    }
+  });
 
-  const taskId = (pi, wn, di, ti) => `${pi}-w${wn}-d${di}-t${ti}`;
+  const [expandedWeeks, setExpandedWeeks] = useState(() => {
+    try {
+      const saved = localStorage.getItem("prince_tracker_expanded_weeks");
+      // Default first week of Phase 1 to expanded
+      return saved ? JSON.parse(saved) : { p1_w1: true };
+    } catch {
+      return { p1_w1: true };
+    }
+  });
 
-  const allIds = w.days.flatMap((d, di) => d.tasks.map((_, ti) => taskId(p.id, w.wn, di, ti)));
-  const doneCount = allIds.filter(id => done[id]).length;
-  const pct = allIds.length ? Math.round((doneCount / allIds.length) * 100) : 0;
+  const [expandedDays, setExpandedDays] = useState(() => {
+    try {
+      const saved = localStorage.getItem("prince_tracker_expanded_days");
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
 
-  const totalWeeks = PHASES.reduce((a, ph) => a + ph.weeks.length, 0);
-  const prevWeeks = PHASES.slice(0, phase).reduce((a, ph) => a + ph.weeks.length, 0);
-  const globalWk = prevWeeks + week + 1;
+  const [completedGaps, setCompletedGaps] = useState(() => {
+    try {
+      const saved = localStorage.getItem("prince_tracker_completed_gaps");
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  });
 
-  const toggle = (id) => setDone(d => ({ ...d, [id]: !d[id] }));
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [activeTab, setActiveTab] = useState("roadmap"); // "roadmap" or "gaps"
+  const [routineExpanded, setRoutineExpanded] = useState(false);
 
-  const FILTERS = [
-    { key: "all", label: "All" },
-    { key: "gate", label: "🎓 GATE" },
-    { key: "lifting", label: "🏋️ Powerlifting" },
-    { key: "dsa", label: "💻 DSA" },
-    { key: "build", label: "🛠 Build" },
-  ];
+  // Sync to localStorage
+  useEffect(() => {
+    localStorage.setItem("prince_tracker_completed_tasks", JSON.stringify(completedTasks));
+  }, [completedTasks]);
 
-  const matchesFilter = (task) => {
-    if (filter === "all") return true;
-    if (filter === "gate") return task.startsWith("🎓");
-    if (filter === "lifting") return task.startsWith("🏋️");
-    if (filter === "dsa") return task.startsWith("💻");
-    if (filter === "build") return task.startsWith("🛠") || task.startsWith("☕") || task.startsWith("🏆") || task.startsWith("🌐");
-    return true;
+  useEffect(() => {
+    localStorage.setItem("prince_tracker_expanded_phases", JSON.stringify(expandedPhases));
+  }, [expandedPhases]);
+
+  useEffect(() => {
+    localStorage.setItem("prince_tracker_expanded_weeks", JSON.stringify(expandedWeeks));
+  }, [expandedWeeks]);
+
+  useEffect(() => {
+    localStorage.setItem("prince_tracker_expanded_days", JSON.stringify(expandedDays));
+  }, [expandedDays]);
+
+  useEffect(() => {
+    localStorage.setItem("prince_tracker_completed_gaps", JSON.stringify(completedGaps));
+  }, [completedGaps]);
+
+  // Date Logic
+  const baselineDate = new Date("2026-06-30");
+  const [currentDate, setCurrentDate] = useState(() => new Date("2026-06-30"));
+  
+  // Calculate day difference
+  const diffTime = Math.abs(currentDate - baselineDate);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+  // Toggle tasks
+  const toggleTask = (taskId) => {
+    setCompletedTasks(prev => ({
+      ...prev,
+      [taskId]: !prev[taskId]
+    }));
   };
 
-  return (
-    <div style={{ fontFamily: "system-ui,-apple-system,sans-serif", background: "#080C18", minHeight: "100vh", color: "#F1F5F9", paddingBottom: 48 }}>
+  // Toggle collapsible day
+  const toggleDay = (dayId) => {
+    setExpandedDays(prev => ({
+      ...prev,
+      [dayId]: !prev[dayId]
+    }));
+  };
 
-      {/* HEADER */}
-      <div style={{ background: "#0D1426", borderBottom: "1px solid #1E2A45", padding: "14px 16px 0" }}>
-        <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.14em", color: "#475569", textTransform: "uppercase", marginBottom: 2 }}>Prince Dharmapala · Full Journey</div>
-        <div style={{ fontSize: 20, fontWeight: 900, color: "#F8FAFC", marginBottom: 2 }}>Week 1 → Internship Day 1</div>
-        <div style={{ fontSize: 11, color: "#475569", marginBottom: 10 }}>Coding · GATE · Powerlifting · All in one</div>
+  // Toggle collapsible week
+  const toggleWeek = (weekId) => {
+    setExpandedWeeks(prev => ({
+      ...prev,
+      [weekId]: !prev[weekId]
+    }));
+  };
 
-        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
-          <div style={{ fontSize: 10, color: "#475569", minWidth: 68 }}>Wk {globalWk}/{totalWeeks}</div>
-          <div style={{ flex: 1, background: "#1E2A45", borderRadius: 99, height: 4, overflow: "hidden" }}>
-            <div style={{ background: p.color, height: "100%", width: `${(globalWk/totalWeeks)*100}%`, borderRadius: 99, transition: "width 0.4s" }} />
-          </div>
-          <div style={{ fontSize: 11, color: p.color, fontWeight: 700, minWidth: 32 }}>{Math.round((globalWk/totalWeeks)*100)}%</div>
+  // Toggle collapsible phase
+  const togglePhase = (phaseId) => {
+    setExpandedPhases(prev => ({
+      ...prev,
+      [phaseId]: !prev[phaseId]
+    }));
+  };
+
+  // Toggle structural gaps
+  const toggleGap = (gapId) => {
+    setCompletedGaps(prev => ({
+      ...prev,
+      [gapId]: !prev[gapId]
+    }));
+  };
+
+  // Check if a task matches current filter
+  const matchesFilter = (task) => {
+    if (activeFilter === "all") return true;
+    if (activeFilter === "dsa" && task.type === "dsa") return true;
+    if (activeFilter === "build" && (task.type === "build" || task.type === "hackathon")) return true;
+    if (activeFilter === "academics" && task.type === "academics") return true;
+    if (activeFilter === "lifting" && task.type === "lifting") return true;
+    if (activeFilter === "comm" && task.type === "comm") return true;
+    return false;
+  };
+
+  // Calculations for global progress
+  let totalRoadmapTasks = 0;
+  let completedRoadmapTasks = 0;
+  PHASES.forEach(phase => {
+    phase.weeks.forEach(week => {
+      week.days.forEach(day => {
+        day.tasks.forEach(task => {
+          totalRoadmapTasks++;
+          if (completedTasks[task.id]) {
+            completedRoadmapTasks++;
+          }
+        });
+      });
+    });
+  });
+
+  const globalProgressPercent = totalRoadmapTasks > 0
+    ? Math.round((completedRoadmapTasks / totalRoadmapTasks) * 100)
+    : 0;
+
+  // Render a progress bar component
+  const ProgressBar = ({ percent, color = "var(--color-purple)", height = "8px", label = "" }) => (
+    <div style={{ width: "100%" }}>
+      {label && (
+        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px", fontSize: "0.8rem" }}>
+          <span style={{ color: "var(--text-secondary)", fontWeight: 500 }}>{label}</span>
+          <span style={{ color, fontWeight: 700 }}>{percent}%</span>
         </div>
+      )}
+      <div style={{ width: "100%", height, background: "var(--border-color)", borderRadius: "9999px", overflow: "hidden" }}>
+        <div style={{
+          width: `${percent}%`,
+          height: "100%",
+          background: color,
+          borderRadius: "9999px",
+          transition: "width 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+          boxShadow: `0 0 10px ${color}`
+        }} />
+      </div>
+    </div>
+  );
 
-        {/* Phase tabs */}
-        <div style={{ display: "flex", gap: 2, overflowX: "auto" }}>
-          {PHASES.map((ph, i) => (
-            <button key={i} onClick={() => { setPhase(i); setWeek(0); setOpen(null); }} style={{
-              padding: "7px 10px", borderRadius: "8px 8px 0 0", border: "none", cursor: "pointer",
-              fontSize: 10, fontWeight: 700, whiteSpace: "nowrap", flexShrink: 0,
-              background: phase === i ? "#080C18" : "transparent",
-              color: phase === i ? ph.color : "#475569",
-              borderTop: `2px solid ${phase === i ? ph.color : "transparent"}`,
-              transition: "all 0.15s", lineHeight: 1.5
-            }}>
-              {ph.label}<br/><span style={{ fontWeight: 400, fontSize: 9 }}>{ph.sublabel}</span>
-            </button>
-          ))}
+  return (
+    <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "20px" }}>
+      
+      {/* 1. TOP PROFILE BANNER */}
+      <div className="glass-panel" style={{
+        borderRadius: "16px",
+        padding: "24px",
+        marginBottom: "24px",
+        position: "relative",
+        overflow: "hidden",
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.5)",
+        background: "radial-gradient(ellipse at top right, rgba(139, 92, 246, 0.1), transparent), var(--card-bg)"
+      }}>
+        <div style={{
+          position: "absolute",
+          top: "0",
+          left: "0",
+          right: "0",
+          height: "4px",
+          background: "linear-gradient(90deg, var(--color-amber), var(--color-purple), var(--color-red), var(--color-green))"
+        }} />
+
+        {/* Profile Grid */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          {/* Header Row */}
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "flex-start", gap: "16px" }}>
+            <div>
+              <span style={{
+                fontSize: "0.75rem",
+                fontWeight: 700,
+                color: "var(--color-purple)",
+                letterSpacing: "2px",
+                textTransform: "uppercase",
+                display: "block",
+                marginBottom: "4px"
+              }}>BUILDER · ATHLETE · ENGINEER</span>
+              <h1 style={{
+                fontFamily: "var(--font-heading)",
+                fontSize: "2rem",
+                fontWeight: 900,
+                color: "var(--text-primary)",
+                lineHeight: "1.2",
+                marginBottom: "4px"
+              }}>Kajipuram Prince Dharmapala</h1>
+              <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
+                🎓 Central University of Jammu, Computer Science (Class of 2027)
+              </p>
+            </div>
+            
+            {/* Quick Status Pill Info */}
+            <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+              <span className="badge" style={{ background: "rgba(239, 68, 68, 0.15)", color: "var(--color-red)", border: "1px solid rgba(239, 68, 68, 0.3)" }}>
+                ⚠️ 5 Active Backlogs
+              </span>
+              <span className="badge" style={{ background: "rgba(245, 158, 11, 0.15)", color: "var(--color-amber)", border: "1px solid rgba(245, 158, 11, 0.3)" }}>
+                🏋️ 66kg Equipped Division
+              </span>
+              <span className="badge" style={{ background: "rgba(16, 185, 129, 0.15)", color: "var(--color-green)", border: "1px solid rgba(16, 185, 129, 0.3)" }}>
+                ⚡ 7th Sem: July 27, 2026
+              </span>
+            </div>
+          </div>
+
+          <div style={{ height: "1px", background: "var(--border-color)" }} />
+
+          {/* Details Row */}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "24px",
+            fontSize: "0.9rem"
+          }}>
+            {/* Graduation Targets */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 700, color: "var(--text-primary)" }}>
+                <span style={{ color: "var(--color-amber)", fontSize: "1.1rem" }}>🎯</span>
+                Academic & Graduation Target
+              </div>
+              <p style={{ color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                Clear all 5 active backlogs (4 from 3rd sem, 1 from 5th sem) to secure a definitive <strong style={{ color: "var(--text-primary)" }}>6.97+ final graduation CGPA</strong>.
+              </p>
+              <div style={{ marginTop: "4px" }}>
+                <span style={{ color: "var(--text-muted)", fontSize: "0.8rem", display: "block" }}>Tracker Deployment:</span>
+                <a href="https://prince-tracker.vercel.app/" target="_blank" rel="noopener noreferrer" style={{
+                  color: "var(--color-blue)",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "4px"
+                }}>
+                  🌐 prince-tracker.vercel.app (Live Dashboard)
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Career Vision */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 700, color: "var(--text-primary)" }}>
+                <span style={{ color: "var(--color-purple)", fontSize: "1.1rem" }}>💼</span>
+                Career Vision & Strategy
+              </div>
+              <p style={{ color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                8th Sem Startup SDE Intern ➔ Fast-Growing Startup Corporate Shipping ➔ Off-Campus Tech MNC SDE-1 Referral Blitz (Amazon, Adobe, Microsoft).
+              </p>
+              <span style={{
+                fontSize: "0.75rem",
+                color: "var(--color-red)",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "4px"
+              }}>
+                🛑 GATE is officially decommissioned.
+              </span>
+            </div>
+
+            {/* Athletic Profile */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontWeight: 700, color: "var(--text-primary)" }}>
+                <span style={{ color: "var(--color-green)", fontSize: "1.1rem" }}>🏋️</span>
+                Athletic Profile & Goals
+              </div>
+              <p style={{ color: "var(--text-secondary)", lineHeight: "1.5" }}>
+                66kg Equipped Division competitor representing Kamareddy District (Telangana Powerlifting Association / IPF Pathway). Focus on strength blocks and strict platform rules.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div style={{ padding: 14 }}>
-
-        {/* Week pills */}
-        <div style={{ display: "flex", gap: 5, overflowX: "auto", marginBottom: 12, paddingBottom: 2 }}>
-          {p.weeks.map((wk, i) => (
-            <button key={i} onClick={() => { setWeek(i); setOpen(null); }} style={{
-              padding: "4px 10px", borderRadius: 99, flexShrink: 0, whiteSpace: "nowrap",
-              border: `1px solid ${week === i ? p.color : "#1E2A45"}`,
-              background: week === i ? p.color : "transparent",
-              color: week === i ? "#fff" : "#64748B",
-              fontSize: 10, fontWeight: 600, cursor: "pointer", transition: "all 0.15s"
-            }}>Wk {wk.wn}</button>
-          ))}
-        </div>
-
-        {/* Week info card */}
-        <div style={{ background: "#0D1426", borderRadius: 12, padding: 14, marginBottom: 12, border: `1px solid ${p.color}44` }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
-            <div style={{ flex: 1 }}>
-              <div style={{ fontSize: 9, color: p.color, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 2 }}>{w.dates}</div>
-              <div style={{ fontSize: 15, fontWeight: 800, color: "#F8FAFC", lineHeight: 1.3 }}>{w.label}</div>
-            </div>
-            <div style={{ textAlign: "right", flexShrink: 0, marginLeft: 10 }}>
-              <div style={{ fontSize: 24, fontWeight: 900, color: "#F8FAFC", lineHeight: 1 }}>{pct}%</div>
-              <div style={{ fontSize: 9, color: "#475569" }}>{doneCount}/{allIds.length}</div>
-            </div>
+      {/* 2. UNIFIED GLOBAL PROGRESS & TIMELINE CARD */}
+      <div className="glass-panel" style={{
+        borderRadius: "16px",
+        padding: "24px",
+        marginBottom: "24px",
+        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
+        border: "1px solid var(--border-color)"
+      }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
+          <div>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "1.3rem", fontWeight: 800, color: "var(--text-primary)", display: "flex", alignItems: "center", gap: "8px" }}>
+              📊 Unified Roadmap Tracker
+            </h2>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", marginTop: "2px" }}>
+              Timeline baseline starts exactly on June 30, 2026.
+            </p>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-            <div style={{ display: "flex", gap: 2 }}>
-              {Array.from({ length: 10 }).map((_, i) => (
-                <div key={i} style={{ width: 13, height: 4, borderRadius: 2, background: i < w.intensity ? INTENSITY_BAR[w.intensity] : "#1E2A45" }} />
+          {/* Date Simulator Widget */}
+          <div className="glass-panel" style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            padding: "8px 16px",
+            borderRadius: "9999px",
+            border: "1px solid var(--border-color)"
+          }}>
+            <span style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>
+              📅 Current Date: <strong>{currentDate.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</strong>
+            </span>
+            <div style={{ display: "flex", gap: "4px" }}>
+              <button 
+                onClick={() => setCurrentDate(new Date("2026-06-30"))} 
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  color: "var(--color-blue)",
+                  fontSize: "0.75rem",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  padding: "2px 6px"
+                }}
+              >
+                Reset
+              </button>
+              <button 
+                onClick={() => setCurrentDate(prev => new Date(prev.getTime() + 24 * 60 * 60 * 1000))} 
+                style={{
+                  background: "var(--border-color)",
+                  border: "none",
+                  color: "var(--text-primary)",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  padding: "2px 8px",
+                  borderRadius: "4px"
+                }}
+              >
+                +1 Day
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Global Progress Metrics */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: "20px", marginBottom: "20px" }}>
+          <ProgressBar 
+            percent={globalProgressPercent} 
+            color="linear-gradient(90deg, var(--color-amber), var(--color-purple))"
+            height="12px"
+            label="Unified Core Roadmap Progress"
+          />
+          <div style={{ textAlign: "right" }}>
+            <span style={{ fontSize: "1.8rem", fontWeight: 900, color: "var(--text-primary)", fontFamily: "var(--font-heading)" }}>{globalProgressPercent}%</span>
+            <span style={{ display: "block", fontSize: "0.75rem", color: "var(--text-muted)" }}>{completedRoadmapTasks} of {totalRoadmapTasks} Tasks</span>
+          </div>
+        </div>
+
+        {/* Horizontal Phase Stages */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+          gap: "12px",
+          marginTop: "16px"
+        }}>
+          {PHASES.map((phase, idx) => {
+            // Calculate completion rate per phase
+            let phaseTasks = 0;
+            let phaseDone = 0;
+            phase.weeks.forEach(w => w.days.forEach(d => d.tasks.forEach(t => {
+              phaseTasks++;
+              if (completedTasks[t.id]) phaseDone++;
+            })));
+            const phasePct = phaseTasks > 0 ? Math.round((phaseDone / phaseTasks) * 100) : 0;
+
+            return (
+              <div 
+                key={phase.id} 
+                onClick={() => togglePhase(phase.id)}
+                style={{
+                  background: "rgba(8, 12, 24, 0.4)",
+                  border: `1px solid ${expandedPhases[phase.id] ? phase.color : "var(--border-color)"}`,
+                  borderRadius: "8px",
+                  padding: "10px 14px",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease"
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "4px" }}>
+                  <span style={{ fontSize: "0.7rem", fontWeight: 700, color: phase.color }}>PHASE {idx+1}</span>
+                  <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--text-primary)" }}>{phasePct}%</span>
+                </div>
+                <div style={{ height: "4px", background: "var(--border-color)", borderRadius: "9999px", overflow: "hidden", marginBottom: "6px" }}>
+                  <div style={{ width: `${phasePct}%`, height: "100%", background: phase.color }} />
+                </div>
+                <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>{phase.dates.split(" – ")[0]}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* 3. LAYOUT GRID FOR MAIN SECTIONS */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "24px" }}>
+        
+        {/* Navigation Tabs (Roadmap vs Gaps Checklist) */}
+        <div style={{ display: "flex", gap: "12px", borderBottom: "1px solid var(--border-color)", paddingBottom: "12px" }}>
+          <button 
+            onClick={() => setActiveTab("roadmap")}
+            style={{
+              background: "transparent",
+              border: "none",
+              borderBottom: activeTab === "roadmap" ? "3px solid var(--color-purple)" : "3px solid transparent",
+              color: activeTab === "roadmap" ? "var(--text-primary)" : "var(--text-muted)",
+              fontFamily: "var(--font-heading)",
+              fontSize: "1.1rem",
+              fontWeight: 800,
+              padding: "8px 16px",
+              cursor: "pointer",
+              transition: "all 0.2s ease"
+            }}
+          >
+            🗓 4-Phase Roadmap
+          </button>
+          
+          <button 
+            onClick={() => setActiveTab("gaps")}
+            style={{
+              background: "transparent",
+              border: "none",
+              borderBottom: activeTab === "gaps" ? "3px solid var(--color-purple)" : "3px solid transparent",
+              color: activeTab === "gaps" ? "var(--text-primary)" : "var(--text-muted)",
+              fontFamily: "var(--font-heading)",
+              fontSize: "1.1rem",
+              fontWeight: 800,
+              padding: "8px 16px",
+              cursor: "pointer",
+              transition: "all 0.2s ease"
+            }}
+          >
+            📋 Structural Gaps & Budgets
+          </button>
+        </div>
+
+        {/* ROADMAP VIEW */}
+        {activeTab === "roadmap" && (
+          <div>
+            {/* Filter Pills */}
+            <div style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "8px",
+              marginBottom: "20px",
+              padding: "4px",
+              background: "rgba(13, 20, 38, 0.4)",
+              borderRadius: "12px",
+              border: "1px solid var(--border-color)"
+            }}>
+              {FILTERS.map(filter => (
+                <button
+                  key={filter.key}
+                  onClick={() => setActiveFilter(filter.key)}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    padding: "8px 16px",
+                    borderRadius: "8px",
+                    border: "1px solid transparent",
+                    background: activeFilter === filter.key ? "var(--border-color)" : "transparent",
+                    color: activeFilter === filter.key ? "var(--text-primary)" : "var(--text-secondary)",
+                    fontWeight: activeFilter === filter.key ? 700 : 500,
+                    fontSize: "0.85rem",
+                    cursor: "pointer",
+                    transition: "all 0.2s ease"
+                  }}
+                >
+                  <span>{filter.emoji}</span>
+                  {filter.label}
+                </button>
               ))}
             </div>
-            <span style={{ fontSize: 10, fontWeight: 700, color: INTENSITY_BAR[w.intensity] }}>{INTENSITY_LABEL[w.intensity]}</span>
-          </div>
 
-          <div style={{ background: "#1E2A45", borderRadius: 8, padding: "7px 10px", borderLeft: `3px solid ${p.color}` }}>
-            <div style={{ fontSize: 9, color: "#475569", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 2 }}>Week Goal</div>
-            <div style={{ fontSize: 12, color: "#CBD5E1", lineHeight: 1.5 }}>{w.goal}</div>
-          </div>
+            {/* Phases Accordion Container */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              {PHASES.map((phase) => {
+                const isPhaseExpanded = !!expandedPhases[phase.id];
 
-          <div style={{ background: "#1E2A45", borderRadius: 99, height: 3, marginTop: 10, overflow: "hidden" }}>
-            <div style={{ background: p.color, height: "100%", width: `${pct}%`, borderRadius: 99, transition: "width 0.4s" }} />
-          </div>
-        </div>
+                // Calculate progress within this phase
+                let totalTasks = 0;
+                let doneTasks = 0;
+                phase.weeks.forEach(w => w.days.forEach(d => d.tasks.forEach(t => {
+                  totalTasks++;
+                  if (completedTasks[t.id]) doneTasks++;
+                })));
+                const phaseProgress = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
 
-        {/* Filter pills */}
-        <div style={{ display: "flex", gap: 5, overflowX: "auto", marginBottom: 12, paddingBottom: 2 }}>
-          {FILTERS.map(f => (
-            <button key={f.key} onClick={() => setFilter(f.key)} style={{
-              padding: "4px 10px", borderRadius: 99, flexShrink: 0, whiteSpace: "nowrap",
-              border: `1px solid ${filter === f.key ? p.color : "#1E2A45"}`,
-              background: filter === f.key ? `${p.color}22` : "transparent",
-              color: filter === f.key ? p.color : "#64748B",
-              fontSize: 10, fontWeight: 600, cursor: "pointer", transition: "all 0.15s"
-            }}>{f.label}</button>
-          ))}
-        </div>
-
-        {/* Days */}
-        {w.days.map((d, di) => {
-          const filteredTasks = d.tasks.filter(matchesFilter);
-          if (filteredTasks.length === 0) return null;
-
-          const dayAllIds = d.tasks.map((_, ti) => taskId(p.id, w.wn, di, ti));
-          const dayDone = dayAllIds.filter(id => done[id]).length;
-          const allDone = dayDone === dayAllIds.length && dayAllIds.length > 0;
-          const isOpen = open === di;
-
-          return (
-            <div key={di} style={{ marginBottom: 8 }}>
-              <div onClick={() => setOpen(isOpen ? null : di)} style={{
-                background: "#0D1426",
-                borderRadius: isOpen ? "10px 10px 0 0" : 10,
-                padding: "10px 12px", cursor: "pointer",
-                display: "flex", alignItems: "center", gap: 10,
-                border: `1px solid ${isOpen ? p.color+"88" : allDone ? p.color+"44" : "#1E2A45"}`,
-                transition: "border-color 0.15s"
-              }}>
-                <div style={{
-                  width: 30, height: 30, borderRadius: 7, flexShrink: 0,
-                  background: allDone ? p.color : "#1E2A45",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  transition: "background 0.2s"
-                }}>
-                  {allDone
-                    ? <svg width="13" height="10" viewBox="0 0 13 10" fill="none"><path d="M1 5L4.5 8.5L12 1" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    : <span style={{ fontSize: 10, fontWeight: 700, color: "#475569" }}>{d.date.split(" ")[0].slice(0,3)}</span>
-                  }
-                </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: "#F1F5F9", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{d.date}</div>
-                  <div style={{ fontSize: 10, color: "#475569" }}>{dayDone}/{dayAllIds.length} done · {filteredTasks.length} shown</div>
-                </div>
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0)", transition: "transform 0.2s", flexShrink: 0 }}>
-                  <path d="M2.5 5L6.5 8.5L10.5 5" stroke="#475569" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-
-              {isOpen && (
-                <div style={{ border: `1px solid ${p.color}88`, borderTop: "none", borderRadius: "0 0 10px 10px", overflow: "hidden" }}>
-                  {d.tasks.map((task, ti) => {
-                    if (!matchesFilter(task)) return null;
-                    const id = taskId(p.id, w.wn, di, ti);
-                    const isDone = done[id];
-                    const bg = TAG_COLOR(task);
-                    const tc = TAG_TEXT(task);
-                    return (
-                      <div key={ti} onClick={() => toggle(id)} style={{
-                        padding: "11px 12px", cursor: "pointer",
-                        display: "flex", gap: 10, alignItems: "flex-start",
-                        background: isDone ? "#0F2A1E" : ti % 2 === 0 ? "#0D1426" : "#0A1020",
-                        borderTop: "1px solid #1E2A45", transition: "background 0.15s"
-                      }}>
+                return (
+                  <div 
+                    key={phase.id} 
+                    className="glass-panel" 
+                    style={{
+                      borderRadius: "12px",
+                      overflow: "hidden",
+                      border: `1px solid ${isPhaseExpanded ? phase.color : "var(--border-color)"}`,
+                      transition: "border-color 0.3s ease"
+                    }}
+                  >
+                    {/* Phase Header */}
+                    <div 
+                      onClick={() => togglePhase(phase.id)}
+                      style={{
+                        padding: "16px 20px",
+                        background: "rgba(13, 20, 38, 0.95)",
+                        cursor: "pointer",
+                        display: "flex",
+                        flexWrap: "wrap",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        gap: "12px",
+                        borderBottom: isPhaseExpanded ? `1px solid ${phase.color}33` : "none"
+                      }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                         <div style={{
-                          width: 18, height: 18, borderRadius: 4, flexShrink: 0, marginTop: 2,
-                          background: isDone ? p.color : "transparent",
-                          border: `2px solid ${isDone ? p.color : "#334155"}`,
-                          display: "flex", alignItems: "center", justifyContent: "center", transition: "all 0.15s"
-                        }}>
-                          {isDone && <svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3 5.5L8 1" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-                        </div>
-                        <div style={{ flex: 1 }}>
-                          <div style={{ fontSize: 12, lineHeight: 1.6, color: isDone ? "#475569" : "#CBD5E1", textDecoration: isDone ? "line-through" : "none" }}>{task}</div>
-                          <div style={{ display: "inline-block", marginTop: 4, padding: "1px 7px", borderRadius: 99, background: bg, color: tc, fontSize: 9, fontWeight: 700 }}>
-                            {task.startsWith("🎓") ? "GATE" : task.startsWith("🏋️") ? "POWERLIFTING" : task.startsWith("💻") ? "DSA" : task.startsWith("🛠") || task.startsWith("☕") ? "BUILD" : task.startsWith("🏆") ? "HACKATHON" : task.startsWith("🎤") ? "INTERVIEW" : "TASK"}
-                          </div>
+                          width: "12px",
+                          height: "12px",
+                          borderRadius: "50%",
+                          background: phase.color,
+                          boxShadow: `0 0 8px ${phase.color}`
+                        }} />
+                        <div>
+                          <h3 style={{
+                            fontFamily: "var(--font-heading)",
+                            fontSize: "1.05rem",
+                            fontWeight: 800,
+                            color: "var(--text-primary)"
+                          }}>{phase.title}</h3>
+                          <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>{phase.dates}</span>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          );
-        })}
 
-        {/* Daily routine */}
-        <div style={{ background: "#0D1426", borderRadius: 12, padding: 14, marginTop: 12, border: "1px solid #1E2A45" }}>
-          <div style={{ fontSize: 9, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 12 }}>Every Day — no exceptions</div>
-          {[
-            ["🌅","Morning","Train — gym, eat, recover. Non negotiable."],
-            ["⚡","After meal","1 LeetCode problem — 30 mins max. Never zero."],
-            ["💻","Afternoon","Main block: cert / Java / project / study (1.5 hrs)"],
-            ["🎓","Late afternoon","GATE study — 1–2 hrs (increase to 4 hrs from Jan 2027)"],
-            ["🏋️","Evening","Powerlifting study — 30 mins. Technique video OR programming theory."],
-            ["🎤","Evening","Voice record 1 interview answer — 2 mins"],
-            ["🌙","Night","8 hrs sleep. No exceptions. This is training too."],
-          ].map(([icon, time, task]) => (
-            <div key={time} style={{ display: "flex", gap: 10, marginBottom: 10 }}>
-              <div style={{ fontSize: 14, flexShrink: 0, marginTop: 1 }}>{icon}</div>
-              <div>
-                <div style={{ fontSize: 9, color: "#475569", fontWeight: 700, marginBottom: 1 }}>{time}</div>
-                <div style={{ fontSize: 11, color: "#94A3B8", lineHeight: 1.5 }}>{task}</div>
+                      <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                        <span className="badge" style={{ background: phase.dimColor, color: phase.color, border: `1px solid ${phase.color}33` }}>
+                          {phaseProgress}% Complete
+                        </span>
+                        <span style={{
+                          transform: isPhaseExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                          transition: "transform 0.2s ease",
+                          color: "var(--text-muted)"
+                        }}>
+                          ▼
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Phase Body (Weeks List) */}
+                    {isPhaseExpanded && (
+                      <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "20px", background: "rgba(8, 12, 24, 0.6)" }}>
+                        {phase.weeks.map((week) => {
+                          const isWeekExpanded = !!expandedWeeks[week.id];
+
+                          // Calculate week's completion
+                          let totalWeekTasks = 0;
+                          let doneWeekTasks = 0;
+                          week.days.forEach(d => d.tasks.forEach(t => {
+                            totalWeekTasks++;
+                            if (completedTasks[t.id]) doneWeekTasks++;
+                          }));
+                          const weekProgress = totalWeekTasks > 0 ? Math.round((doneWeekTasks / totalWeekTasks) * 100) : 0;
+
+                          return (
+                            <div 
+                              key={week.id} 
+                              style={{
+                                background: "var(--card-bg)",
+                                borderRadius: "10px",
+                                border: `1px solid ${isWeekExpanded ? "rgba(139, 92, 246, 0.3)" : "var(--border-color)"}`,
+                                overflow: "hidden",
+                                transition: "border-color 0.2s ease"
+                              }}
+                            >
+                              {/* Week Header */}
+                              <div 
+                                onClick={() => toggleWeek(week.id)}
+                                style={{
+                                  padding: "12px 16px",
+                                  background: "rgba(26, 42, 69, 0.2)",
+                                  cursor: "pointer",
+                                  display: "flex",
+                                  flexWrap: "wrap",
+                                  justifyContent: "space-between",
+                                  alignItems: "center",
+                                  gap: "8px"
+                                }}
+                              >
+                                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                                  <span style={{
+                                    fontSize: "0.75rem",
+                                    fontWeight: 800,
+                                    background: "rgba(139, 92, 246, 0.2)",
+                                    color: "var(--color-purple)",
+                                    padding: "3px 8px",
+                                    borderRadius: "4px"
+                                  }}>WEEK {week.number}</span>
+                                  <div>
+                                    <h4 style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--text-primary)" }}>
+                                      {week.focus}
+                                    </h4>
+                                    <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>{week.dates}</span>
+                                  </div>
+                                </div>
+
+                                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                                  <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                                    <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>Intensity:</span>
+                                    <span style={{
+                                      fontSize: "0.75rem",
+                                      fontWeight: 700,
+                                      color: INTENSITY_COLORS[week.intensity] || "var(--text-primary)"
+                                    }}>
+                                      {week.intensity}/10 ({INTENSITY_LABELS[week.intensity]})
+                                    </span>
+                                  </div>
+                                  
+                                  <span className="badge" style={{ background: "rgba(16, 185, 129, 0.15)", color: "var(--color-green)" }}>
+                                    {weekProgress}%
+                                  </span>
+
+                                  <span style={{
+                                    transform: isWeekExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                                    transition: "transform 0.2s ease",
+                                    fontSize: "0.8rem",
+                                    color: "var(--text-muted)"
+                                  }}>
+                                    ▼
+                                  </span>
+                                </div>
+                              </div>
+
+                              {/* Week Content (Days List) */}
+                              {isWeekExpanded && (
+                                <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "12px" }}>
+                                  {week.days.map((day) => {
+                                    const isDayExpanded = !!expandedDays[day.id];
+                                    
+                                    // Filter day's tasks
+                                    const filteredTasks = day.tasks.filter(matchesFilter);
+
+                                    // If filter is active and this day has no matches, skip rendering
+                                    if (activeFilter !== "all" && filteredTasks.length === 0) return null;
+
+                                    // Calculate day completion status
+                                    let dayTotal = day.tasks.length;
+                                    let dayDoneCount = day.tasks.filter(t => completedTasks[t.id]).length;
+                                    const isDayAllDone = dayTotal > 0 && dayDoneCount === dayTotal;
+
+                                    return (
+                                      <div 
+                                        key={day.id} 
+                                        style={{
+                                          borderRadius: "8px",
+                                          border: "1px solid var(--border-color)",
+                                          overflow: "hidden"
+                                        }}
+                                      >
+                                        {/* Day Header */}
+                                        <div 
+                                          onClick={() => toggleDay(day.id)}
+                                          style={{
+                                            padding: "10px 14px",
+                                            background: "rgba(13, 20, 38, 0.6)",
+                                            cursor: "pointer",
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            alignItems: "center"
+                                          }}
+                                        >
+                                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                            <div style={{
+                                              width: "20px",
+                                              height: "20px",
+                                              borderRadius: "4px",
+                                              background: isDayAllDone ? "var(--color-green)" : "var(--border-color)",
+                                              display: "flex",
+                                              alignItems: "center",
+                                              justifyContent: "center",
+                                              fontSize: "0.7rem",
+                                              fontWeight: 800,
+                                              color: "#fff",
+                                              transition: "background 0.2s"
+                                            }}>
+                                              {isDayAllDone ? "✓" : "•"}
+                                            </div>
+                                            <span style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--text-primary)" }}>
+                                              {day.date}
+                                            </span>
+                                          </div>
+
+                                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                                            <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+                                              {dayDoneCount}/{dayTotal} Done
+                                            </span>
+                                            <span style={{
+                                              transform: isDayExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                                              transition: "transform 0.2s ease",
+                                              fontSize: "0.75rem",
+                                              color: "var(--text-muted)"
+                                            }}>
+                                              ▼
+                                            </span>
+                                          </div>
+                                        </div>
+
+                                        {/* Day Tasks List */}
+                                        {isDayExpanded && (
+                                          <div style={{ background: "rgba(8, 12, 24, 0.4)", borderTop: "1px solid var(--border-color)" }}>
+                                            {filteredTasks.map((task) => {
+                                              const isTaskDone = !!completedTasks[task.id];
+                                              
+                                              // Tag text conversion
+                                              const taskTagLabel = 
+                                                task.type === "dsa" ? "DSA" :
+                                                task.type === "build" ? "BUILD" :
+                                                task.type === "academics" ? "ACADEMICS" :
+                                                task.type === "lifting" ? "POWERLIFTING" :
+                                                task.type === "comm" ? "COMMUNICATION" :
+                                                task.type === "hackathon" ? "SIH HACKATHON" : "TASK";
+
+                                              const taskTagColor = 
+                                                task.type === "dsa" ? "var(--color-blue)" :
+                                                task.type === "build" ? "var(--color-purple)" :
+                                                task.type === "academics" ? "var(--color-amber)" :
+                                                task.type === "lifting" ? "var(--color-green)" :
+                                                task.type === "comm" ? "#EC4899" :
+                                                task.type === "hackathon" ? "var(--color-red)" : "var(--text-muted)";
+
+                                              return (
+                                                <div 
+                                                  key={task.id}
+                                                  onClick={() => toggleTask(task.id)}
+                                                  style={{
+                                                    display: "flex",
+                                                    alignItems: "flex-start",
+                                                    gap: "12px",
+                                                    padding: "12px 14px",
+                                                    borderBottom: "1px solid rgba(30, 42, 69, 0.4)",
+                                                    cursor: "pointer",
+                                                    background: isTaskDone ? "rgba(16, 185, 129, 0.05)" : "transparent",
+                                                    transition: "background 0.2s ease"
+                                                  }}
+                                                >
+                                                  {/* Custom checkbox */}
+                                                  <div className="checkbox-spin" style={{
+                                                    width: "18px",
+                                                    height: "18px",
+                                                    borderRadius: "4px",
+                                                    border: `2px solid ${isTaskDone ? "var(--color-green)" : "var(--text-muted)"}`,
+                                                    background: isTaskDone ? "var(--color-green)" : "transparent",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent: "center",
+                                                    marginTop: "2px",
+                                                    flexShrink: 0
+                                                  }}>
+                                                    {isTaskDone && (
+                                                      <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                                                        <path d="M1 4L3.5 6.5L9 1" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                                                      </svg>
+                                                    )}
+                                                  </div>
+
+                                                  <div style={{ flex: 1 }}>
+                                                    <span style={{
+                                                      fontSize: "0.85rem",
+                                                      lineHeight: "1.5",
+                                                      color: isTaskDone ? "var(--text-muted)" : "var(--text-secondary)",
+                                                      textDecoration: isTaskDone ? "line-through" : "none"
+                                                    }}>
+                                                      {task.text}
+                                                    </span>
+                                                    <div style={{ marginTop: "6px" }}>
+                                                      <span className="badge" style={{ 
+                                                        background: `${taskTagColor}15`, 
+                                                        color: taskTagColor,
+                                                        border: `1px solid ${taskTagColor}33`,
+                                                        fontSize: "0.65rem",
+                                                        padding: "1px 6px"
+                                                      }}>
+                                                        {taskTagLabel}
+                                                      </span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              );
+                                            })}
+                                          </div>
+                                        )}
+                                      </div>
+                                    );
+                                  })}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* INTEGRATED UNIFIED COVERAGE SECTION */}
+        {activeTab === "gaps" && (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px" }}>
+            
+            {/* Gaps checklist items */}
+            {/* 1. English & Communication */}
+            <div className="glass-panel" style={{ borderRadius: "12px", padding: "20px", border: "1px solid var(--border-color)" }}>
+              <h3 style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", color: "#EC4899", marginBottom: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
+                <span>🎤</span> English & Communication
+              </h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                {[
+                  { id: "gap_comm_1", text: "🎤 2-minute daily project voice log tracking" },
+                  { id: "gap_comm_2", text: "🎤 Non-subtitle video shadowing sessions" },
+                  { id: "gap_comm_3", text: "🎤 Technical blog reading out loud (5-10 mins)" }
+                ].map(item => (
+                  <div key={item.id} onClick={() => toggleGap(item.id)} style={{ display: "flex", gap: "10px", alignItems: "center", cursor: "pointer" }}>
+                    <div style={{
+                      width: "16px", height: "16px", borderRadius: "3px", 
+                      border: `2px solid ${completedGaps[item.id] ? "#EC4899" : "var(--text-muted)"}`,
+                      background: completedGaps[item.id] ? "#EC4899" : "transparent",
+                      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
+                    }}>
+                      {completedGaps[item.id] && <span style={{ fontSize: "0.6rem", color: "#fff" }}>✓</span>}
+                    </div>
+                    <span style={{ fontSize: "0.85rem", color: completedGaps[item.id] ? "var(--text-muted)" : "var(--text-secondary)" }}>{item.text}</span>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* Legend */}
-        <div style={{ background: "#0D1426", borderRadius: 12, padding: 14, marginTop: 10, border: "1px solid #1E2A45" }}>
-          <div style={{ fontSize: 9, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 10 }}>Filter Guide</div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {[
-              ["🎓 GATE", "#FEF3C7", "#92400E"],
-              ["🏋️ Powerlifting", "#D1FAE5", "#065F46"],
-              ["💻 DSA / LeetCode", "#DBEAFE", "#1E40AF"],
-              ["🛠 Build / Java", "#EDE9FE", "#5B21B6"],
-              ["🏆 Hackathon", "#FEE2E2", "#991B1B"],
-            ].map(([label, bg, tc]) => (
-              <div key={label} style={{ padding: "3px 9px", borderRadius: 99, background: bg, color: tc, fontSize: 10, fontWeight: 700 }}>{label}</div>
-            ))}
+            {/* 2. System Design Foundations */}
+            <div className="glass-panel" style={{ borderRadius: "12px", padding: "20px", border: "1px solid var(--border-color)" }}>
+              <h3 style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", color: "var(--color-blue)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
+                <span>💻</span> System Design Foundations
+              </h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                {[
+                  { id: "gap_sys_1", text: "💻 Client-Server interactions & HTTP codes" },
+                  { id: "gap_sys_2", text: "💻 NoSQL vs SQL architectural scaling" },
+                  { id: "gap_sys_3", text: "💻 Load Balancing mechanics & round-robin" },
+                  { id: "gap_sys_4", text: "💻 Caching strategies (Write-Through vs Cache-Aside)" },
+                  { id: "gap_sys_5", text: "💻 Background Worker management (Queue brokers)" }
+                ].map(item => (
+                  <div key={item.id} onClick={() => toggleGap(item.id)} style={{ display: "flex", gap: "10px", alignItems: "center", cursor: "pointer" }}>
+                    <div style={{
+                      width: "16px", height: "16px", borderRadius: "3px", 
+                      border: `2px solid ${completedGaps[item.id] ? "var(--color-blue)" : "var(--text-muted)"}`,
+                      background: completedGaps[item.id] ? "var(--color-blue)" : "transparent",
+                      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
+                    }}>
+                      {completedGaps[item.id] && <span style={{ fontSize: "0.6rem", color: "#fff" }}>✓</span>}
+                    </div>
+                    <span style={{ fontSize: "0.85rem", color: completedGaps[item.id] ? "var(--text-muted)" : "var(--text-secondary)" }}>{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 3. CS Core Frameworks */}
+            <div className="glass-panel" style={{ borderRadius: "12px", padding: "20px", border: "1px solid var(--border-color)" }}>
+              <h3 style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", color: "var(--color-amber)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
+                <span>🎓</span> CS Core Frameworks
+              </h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                {[
+                  { id: "gap_core_1", text: "🎓 OOP pillars (Encapsulation, Polymorphism, Inheritance)" },
+                  { id: "gap_core_2", text: "🎓 OS processes vs threads, scheduling & context swaps" },
+                  { id: "gap_core_3", text: "🎓 Database ACID properties (Transactions locks)" },
+                  { id: "gap_core_4", text: "🎓 TCP/UDP protocol selections & handshake" }
+                ].map(item => (
+                  <div key={item.id} onClick={() => toggleGap(item.id)} style={{ display: "flex", gap: "10px", alignItems: "center", cursor: "pointer" }}>
+                    <div style={{
+                      width: "16px", height: "16px", borderRadius: "3px", 
+                      border: `2px solid ${completedGaps[item.id] ? "var(--color-amber)" : "var(--text-muted)"}`,
+                      background: completedGaps[item.id] ? "var(--color-amber)" : "transparent",
+                      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
+                    }}>
+                      {completedGaps[item.id] && <span style={{ fontSize: "0.6rem", color: "#fff" }}>✓</span>}
+                    </div>
+                    <span style={{ fontSize: "0.85rem", color: completedGaps[item.id] ? "var(--text-muted)" : "var(--text-secondary)" }}>{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 4. Tools Mastery */}
+            <div className="glass-panel" style={{ borderRadius: "12px", padding: "20px", border: "1px solid var(--border-color)" }}>
+              <h3 style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", color: "var(--color-purple)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
+                <span>🛠</span> Tools Mastery
+              </h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                {[
+                  { id: "gap_tool_1", text: "🛠 Postman endpoint routing validations & automated scripts" },
+                  { id: "gap_tool_2", text: "🛠 LeetCode SQL-50 track progression (Active queries)" },
+                  { id: "gap_tool_3", text: "🛠 Writing a clean custom Dockerfile for multi-stage node builds" }
+                ].map(item => (
+                  <div key={item.id} onClick={() => toggleGap(item.id)} style={{ display: "flex", gap: "10px", alignItems: "center", cursor: "pointer" }}>
+                    <div style={{
+                      width: "16px", height: "16px", borderRadius: "3px", 
+                      border: `2px solid ${completedGaps[item.id] ? "var(--color-purple)" : "var(--text-muted)"}`,
+                      background: completedGaps[item.id] ? "var(--color-purple)" : "transparent",
+                      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
+                    }}>
+                      {completedGaps[item.id] && <span style={{ fontSize: "0.6rem", color: "#fff" }}>✓</span>}
+                    </div>
+                    <span style={{ fontSize: "0.85rem", color: completedGaps[item.id] ? "var(--text-muted)" : "var(--text-secondary)" }}>{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 5. Powerlifting Gear Budget Timeline */}
+            <div className="glass-panel" style={{ borderRadius: "12px", padding: "20px", border: "1px solid var(--border-color)", gridColumn: "span 1" }}>
+              <h3 style={{ fontFamily: "var(--font-heading)", fontSize: "1.1rem", color: "var(--color-green)", marginBottom: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
+                <span>🏋️</span> Gear Budget Milestones
+              </h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                {[
+                  { id: "gap_gear_1", text: "🏋️ Chalk (Immediate Target)", sub: "Status: Acquired" },
+                  { id: "gap_gear_2", text: "🏋️ Wrist Wraps (Month 2 Target)", sub: "Estimated cost: ₹1,500" },
+                  { id: "gap_gear_3", text: "🏋️ Knee Sleeves (Month 3 Target)", sub: "Estimated cost: ₹3,500" },
+                  { id: "gap_gear_4", text: "🏋️ 10mm Lever Belt (Month 4 Target)", sub: "Estimated cost: ₹8,000" },
+                  { id: "gap_gear_5", text: "🏋️ IPF Approved Singlet (Pre-Competition)", sub: "Estimated cost: ₹6,000" }
+                ].map(item => (
+                  <div key={item.id} onClick={() => toggleGap(item.id)} style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    padding: "6px 8px",
+                    borderRadius: "6px",
+                    background: completedGaps[item.id] ? "rgba(16, 185, 129, 0.05)" : "transparent"
+                  }}>
+                    <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                      <div style={{
+                        width: "16px", height: "16px", borderRadius: "3px", 
+                        border: `2px solid ${completedGaps[item.id] ? "var(--color-green)" : "var(--text-muted)"}`,
+                        background: completedGaps[item.id] ? "var(--color-green)" : "transparent",
+                        display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0
+                      }}>
+                        {completedGaps[item.id] && <span style={{ fontSize: "0.6rem", color: "#fff" }}>✓</span>}
+                      </div>
+                      <div>
+                        <span style={{ fontSize: "0.85rem", color: completedGaps[item.id] ? "var(--text-muted)" : "var(--text-secondary)" }}>{item.text}</span>
+                        <span style={{ display: "block", fontSize: "0.7rem", color: "var(--text-muted)" }}>{item.sub}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        )}
+
+      </div>
+
+      {/* 4. STICKY DAILY ROUTINE ANCHOR */}
+      <div className="glass-panel" style={{
+        position: "fixed",
+        bottom: "20px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "calc(100% - 40px)",
+        maxWidth: "800px",
+        borderRadius: "16px",
+        boxShadow: "0 -8px 32px rgba(0, 0, 0, 0.6)",
+        border: "1px solid var(--border-color)",
+        zIndex: 100,
+        overflow: "hidden",
+        transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+      }}>
+        {/* Anchor Header */}
+        <div 
+          onClick={() => setRoutineExpanded(!routineExpanded)}
+          style={{
+            padding: "12px 20px",
+            background: "rgba(13, 20, 38, 0.95)",
+            cursor: "pointer",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <span style={{ fontSize: "1.2rem" }}>🌅</span>
+            <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "var(--text-primary)" }}>
+              Daily Routine Anchor (Flipped for Evening Workouts)
+            </span>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <span style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+              {routineExpanded ? "Click to Collapse" : "Click to Expand"}
+            </span>
+            <span style={{ transform: routineExpanded ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.2s", fontSize: "0.75rem", color: "var(--text-muted)" }}>
+              ▼
+            </span>
           </div>
         </div>
 
+        {/* Anchor Expanded Details */}
+        {routineExpanded && (
+          <div style={{
+            padding: "16px 20px",
+            background: "var(--card-bg)",
+            borderTop: "1px solid var(--border-color)",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: "16px",
+            maxHeight: "350px",
+            overflowY: "auto"
+          }}>
+            {[
+              { time: "🌅 Morning (Fresh Brain)", desc: "1 LeetCode problem (30 mins) + Core Sandbox Reverse-Engineering." },
+              { time: "⚡ Afternoon Block", desc: "University classes, intensive backlog preparation, and documentation reviews." },
+              { time: "🏋️ Evening (Maximum Fuel)", desc: "Hit gym after exactly 3 solid pre-workout meals for optimal equipped powerlifting." },
+              { time: "🎤 Late Evening", desc: "Post-workout recovery meal, 2-minute voice recording, daily Git commit push." },
+              { time: "🌙 Night Recovery", desc: "8 hours of strict non-negotiable sleep." }
+            ].map((block, idx) => (
+              <div key={idx} style={{
+                background: "rgba(8, 12, 24, 0.4)",
+                padding: "12px",
+                borderRadius: "8px",
+                borderLeft: `3px solid ${idx === 2 ? "var(--color-green)" : "var(--color-purple)"}`
+              }}>
+                <span style={{ fontSize: "0.8rem", fontWeight: 700, color: "var(--text-primary)", display: "block", marginBottom: "4px" }}>
+                  {block.time}
+                </span>
+                <p style={{ fontSize: "0.75rem", color: "var(--text-secondary)", lineHeight: "1.4" }}>
+                  {block.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
+
     </div>
   );
 }
